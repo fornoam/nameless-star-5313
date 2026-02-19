@@ -1,173 +1,567 @@
 <!DOCTYPE html>
-<!--
-	Interphase by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Interphase by TEMPLATED</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-layers.min.js"></script>
-		<script src="js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
-		</noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-	</head>
-	<body class="landing">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Appointment Scheduler</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-powered voice agent that calls your hairdresser and books an appointment for you.">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-		<!-- Header -->
-			<header id="header">
-				<h1><a href="index.html">Interphase</a></h1>
-				<nav id="nav">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="generic.html">Generic</a></li>
-						<li><a href="elements.html">Elements</a></li>
-					</ul>
-				</nav>
-			</header>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaf0;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
 
-		<!-- Banner -->
-			<section id="banner">
-				<h2>This is Interphase</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				<ul class="actions">
-					<li>
-						<a href="#" class="button big">Learn More</a>
-					</li>
-				</ul>
-			</section>
+    a { color: #7c9ef5; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-		<!-- One -->
-			<section id="one" class="wrapper style1 align-center">
-				<div class="container">
-					<header>
-						<h2>Consectetur adipisicing elit</h2>
-						<p>Lorem ipsum dolor sit amet adipisicing elit. Delectus consequatur sed tempus.</p>
-					</header>
-					<div class="row 200%">
-						<section class="4u 12u$(small)">
-							<i class="icon big rounded fa-clock-o"></i>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim quam consectetur quibusdam magni minus aut modi aliquid.</p>
-						</section>
-						<section class="4u 12u$(small)">
-							<i class="icon big rounded fa-comments"></i>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium ullam consequatur repellat debitis maxime molestiae.</p>
-						</section>
-						<section class="4u$ 12u$(small)">
-							<i class="icon big rounded fa-user"></i>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque eaque eveniet, nesciunt molestias. Ipsam, voluptate vero.</p>
-						</section>
-					</div>
-				</div>
-			</section>
+    /* ===== Header ===== */
+    header {
+      background: #1a1d2e;
+      border-bottom: 1px solid #2a2d3e;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-		<!-- Two -->
-			<section id="two" class="wrapper style2 align-center">
-				<div class="container">
-					<header>
-						<h2>Lorem ipsum dolor sit</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, autem.</p>
-					</header>
-					<div class="row">
-						<section class="feature 6u 12u$(small)">
-							<img class="image fit" src="images/pic01.jpg" alt="" />
-							<h3 class="title">Lorem ipsum dolor</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore ipsa voluptate, quae quibusdam. Doloremque similique, reiciendis sit quibusdam aperiam? Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</section>
-						<section class="feature 6u$ 12u$(small)">
-							<img class="image fit" src="images/pic02.jpg" alt="" />
-							<h3 class="title">Esse, fugiat, in</h3>
-							<p>Natus perspiciatis fugit illum porro iusto fuga nam voluptas minima voluptates deserunt, veniam reiciendis harum repellat necessitatibus. Animi, adipisci qui. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</section>
-						<section class="feature 6u 12u$(small)">
-							<img class="image fit" src="images/pic03.jpg" alt="" />
-							<h3 class="title">Voluptates, repudiandae, dolor</h3>
-							<p>Voluptatibus repellendus tempora, quia! Consequuntur atque, rerum quis, ullam labore officiis ipsa beatae dolore, assumenda eos harum repudiandae, qui ab! Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</section>
-						<section class="feature 6u$ 12u$(small)">
-							<img class="image fit" src="images/pic04.jpg" alt="" />
-							<h3 class="title">Eveniet, reiciendis, veniam</h3>
-							<p>Rem nulla molestiae inventore quibusdam repudiandae doloremque eveniet ullam, qui autem possimus saepe laudantium numquam sapiente vel. Repudiandae, nihil tempore. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</section>
-					</div>
-					<footer>
-						<ul class="actions">
-							<li>
-								<a href="#" class="button alt big">Learn More</a>
-							</li>
-						</ul>
-					</footer>
-				</div>
-			</section>
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
 
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<div class="row">
-						<section class="4u 6u(medium) 12u$(small)">
-							<h3>Lorem ipsum</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, cumque!</p>
-							<ul class="alt">
-								<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
-								<li><a href="#">Quod adipisci perferendis et itaque.</a></li>
-								<li><a href="#">Itaque eveniet ullam, veritatis reiciendis?</a></li>
-								<li><a href="#">Accusantium repellat accusamus a, soluta.</a></li>
-							</ul>
-						</section>
-						<section class="4u 6u$(medium) 12u$(small)">
-							<h3>Nostrum, repellat!</h3>
-							<p>Tenetur voluptate exercitationem eius tempora! Obcaecati suscipit, soluta earum blanditiis.</p>
-							<ul class="alt">
-								<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
-								<li><a href="#">Id inventore, qui necessitatibus sunt.</a></li>
-								<li><a href="#">Deleniti eum odit nostrum eveniet.</a></li>
-								<li><a href="#">Illum consectetur quibusdam eos corporis.</a></li>
-							</ul>
-						</section>
-						<section class="4u$ 12u$(medium) 12u$(small)">
-							<h3>Contact Us</h3>
-							<ul class="icons">
-								<li><a href="#" class="icon rounded fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon rounded fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon rounded fa-pinterest"><span class="label">Pinterest</span></a></li>
-								<li><a href="#" class="icon rounded fa-google-plus"><span class="label">Google+</span></a></li>
-								<li><a href="#" class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							</ul>
-							<ul class="tabular">
-								<li>
-									<h3>Address</h3>
-									1234 Somewhere Road<br>
-									Nashville, TN 00000
-								</li>
-								<li>
-									<h3>Mail</h3>
-									<a href="#">someone@untitled.tld</a>
-								</li>
-								<li>
-									<h3>Phone</h3>
-									(000) 000-0000
-								</li>
-							</ul>
-						</section>
-					</div>
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-					</ul>
-				</div>
-			</footer>
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #7c9ef5, #a78bfa);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
 
-	</body>
+    .badge {
+      font-size: 0.7rem;
+      background: linear-gradient(135deg, #7c9ef5, #a78bfa);
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #7c9ef5, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #9499b0;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+
+    .how-it-works {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .how-step {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #7c9ef5;
+    }
+
+    .how-step .step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #7c9ef5;
+      color: #0f1117;
+      font-weight: 700;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ===== Main Layout ===== */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* ===== Card ===== */
+    .card {
+      background: #1a1d2e;
+      border: 1px solid #2a2d3e;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7094;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ===== Form ===== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #c5c9de;
+    }
+
+    label .required {
+      color: #f87171;
+      margin-left: 2px;
+    }
+
+    label .optional {
+      font-weight: 400;
+      color: #6b7094;
+      font-size: 0.78rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    select {
+      background: #0f1117;
+      border: 1px solid #2a2d3e;
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.95rem;
+      color: #e8eaf0;
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -webkit-appearance: none;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #7c9ef5;
+      box-shadow: 0 0 0 3px rgba(124, 158, 245, 0.15);
+    }
+
+    input::placeholder {
+      color: #4a4f6a;
+    }
+
+    select option {
+      background: #1a1d2e;
+    }
+
+    /* ===== Button ===== */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #7c9ef5, #a78bfa);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .button:hover { opacity: 0.9; }
+    .button:active { transform: scale(0.99); }
+    .button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ===== Error ===== */
+    .form-error {
+      display: none;
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      color: #f87171;
+      font-size: 0.875rem;
+      margin-top: 0.75rem;
+    }
+
+    /* ===== Status Panel ===== */
+    #status-panel { display: none; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      background: rgba(124, 158, 245, 0.12);
+      border: 1px solid rgba(124, 158, 245, 0.3);
+      color: #7c9ef5;
+    }
+
+    .status-badge.status-in-progress,
+    .status-badge.status-calling {
+      background: rgba(124, 158, 245, 0.12);
+      border-color: rgba(124, 158, 245, 0.3);
+      color: #7c9ef5;
+    }
+
+    .status-badge.status-completed {
+      background: rgba(52, 211, 153, 0.12);
+      border-color: rgba(52, 211, 153, 0.3);
+      color: #34d399;
+    }
+
+    .status-badge.status-failed,
+    .status-badge.status-no-answer,
+    .status-badge.status-busy,
+    .status-badge.status-canceled {
+      background: rgba(248, 113, 113, 0.12);
+      border-color: rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .status-dot.pulse {
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* ===== Transcript ===== */
+    .transcript-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7094;
+      margin-bottom: 1rem;
+    }
+
+    #transcript {
+      max-height: 340px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-right: 0.25rem;
+    }
+
+    #transcript::-webkit-scrollbar { width: 4px; }
+    #transcript::-webkit-scrollbar-track { background: transparent; }
+    #transcript::-webkit-scrollbar-thumb { background: #2a2d3e; border-radius: 2px; }
+
+    .transcript-empty {
+      color: #4a4f6a;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .transcript-turn {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      max-width: 85%;
+    }
+
+    .turn-agent { align-self: flex-start; }
+    .turn-salon { align-self: flex-end; }
+
+    .turn-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .turn-agent .turn-label { color: #7c9ef5; }
+    .turn-salon .turn-label { color: #a78bfa; text-align: right; }
+
+    .turn-text {
+      padding: 0.6rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .turn-agent .turn-text {
+      background: #1e2235;
+      border: 1px solid #2a2d3e;
+      color: #c5c9de;
+      border-bottom-left-radius: 4px;
+    }
+
+    .turn-salon .turn-text {
+      background: rgba(167, 139, 250, 0.12);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      color: #c5c9de;
+      border-bottom-right-radius: 4px;
+      text-align: right;
+    }
+
+    /* ===== Result Card ===== */
+    #result-card { display: none; }
+
+    .result-confirmed,
+    .result-failed {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .result-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .result-confirmed .result-icon {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+      border: 2px solid rgba(52, 211, 153, 0.4);
+    }
+
+    .result-failed .result-icon {
+      background: rgba(248, 113, 113, 0.15);
+      color: #f87171;
+      border: 2px solid rgba(248, 113, 113, 0.4);
+    }
+
+    .result-confirmed h3 { color: #34d399; margin-bottom: 0.75rem; font-size: 1.2rem; }
+    .result-failed h3 { color: #f87171; margin-bottom: 0.75rem; font-size: 1.2rem; }
+
+    .result-confirmed p,
+    .result-failed p {
+      color: #9499b0;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .result-confirmed p strong { color: #e8eaf0; }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #4a4f6a;
+      font-size: 0.82rem;
+      border-top: 1px solid #1a1d2e;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .how-it-works { flex-direction: column; align-items: center; gap: 0.75rem; }
+      .card { padding: 1.25rem; }
+      .hero { padding: 2.5rem 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">&#9742;</div>
+      <span>AppointmentAI</span>
+    </div>
+    <span class="badge">Powered by Claude</span>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Book your haircut with an <span>AI voice call</span></h1>
+    <p>
+      Tell us your preferences and our AI agent will call your salon,
+      have a natural conversation, and schedule your appointment — hands-free.
+    </p>
+    <div class="how-it-works">
+      <div class="how-step">
+        <span class="step-num">1</span>
+        <span>Fill in your details</span>
+      </div>
+      <div class="how-step">
+        <span class="step-num">2</span>
+        <span>AI calls your salon</span>
+      </div>
+      <div class="how-step">
+        <span class="step-num">3</span>
+        <span>Appointment confirmed</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Scheduling Form -->
+    <section id="form-section">
+      <div class="card">
+        <div class="card-title">Your Details</div>
+        <form id="scheduler-form">
+          <div class="form-grid">
+            <!-- Customer name -->
+            <div class="form-group full-width">
+              <label for="customerName">Your Name <span class="required">*</span></label>
+              <input type="text" id="customerName" placeholder="e.g. Alex Smith" required>
+            </div>
+
+            <!-- Salon phone -->
+            <div class="form-group">
+              <label for="hairdresserPhone">Salon Phone Number <span class="required">*</span></label>
+              <input type="tel" id="hairdresserPhone" placeholder="+1 (555) 000-0000" required>
+            </div>
+
+            <!-- Salon name -->
+            <div class="form-group">
+              <label for="hairdresserName">Salon / Stylist Name <span class="optional">(optional)</span></label>
+              <input type="text" id="hairdresserName" placeholder="e.g. The Hair Studio">
+            </div>
+
+            <!-- Service type -->
+            <div class="form-group full-width">
+              <label for="service">Service <span class="required">*</span></label>
+              <select id="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="haircut">Haircut</option>
+                <option value="trim">Trim</option>
+                <option value="hair coloring">Hair Coloring</option>
+                <option value="highlights">Highlights</option>
+                <option value="balayage">Balayage</option>
+                <option value="blowout">Blowout</option>
+                <option value="keratin treatment">Keratin Treatment</option>
+                <option value="haircut and color">Haircut & Color</option>
+                <option value="beard trim">Beard Trim</option>
+                <option value="full service (haircut and styling)">Full Service (Haircut + Styling)</option>
+              </select>
+            </div>
+
+            <!-- Preferred date -->
+            <div class="form-group">
+              <label for="preferredDate">Preferred Date <span class="optional">(optional)</span></label>
+              <input type="date" id="preferredDate">
+            </div>
+
+            <!-- Preferred time -->
+            <div class="form-group">
+              <label for="preferredTime">Preferred Time <span class="optional">(optional)</span></label>
+              <input type="time" id="preferredTime">
+            </div>
+          </div>
+
+          <div id="form-error" class="form-error"></div>
+
+          <button type="submit" class="button" id="call-btn">
+            &#9742; Call &amp; Schedule Appointment
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Status Panel (shown after call starts) -->
+    <section id="status-panel">
+      <div class="card">
+        <div id="status-badge" class="status-badge status-calling">
+          <span id="status-dot" class="status-dot pulse"></span>
+          <span id="status-text">Dialing salon...</span>
+        </div>
+
+        <div class="transcript-label">Live Transcript</div>
+        <div id="transcript">
+          <p class="transcript-empty">Waiting for call to connect...</p>
+        </div>
+      </div>
+
+      <!-- Result Card -->
+      <div class="card" id="result-card"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Voice calls are handled by Twilio &bull; Conversation AI powered by Anthropic Claude</p>
+    <p style="margin-top:0.3rem;">Requires a configured <code>.env</code> file with Twilio and Anthropic credentials.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+</body>
 </html>
