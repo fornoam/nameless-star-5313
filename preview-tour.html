@@ -2391,8 +2391,10 @@ function getTourById(id) {
 
   // ---- Init ----
   function init() {
+    // htmlpreview.github.io strips query strings, so read slug from hash first
+    const hash = window.location.hash.slice(1);
     const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug') || '';
+    const slug = hash || params.get('slug') || (TOURS_DATA[0] && TOURS_DATA[0].slug) || '';
 
     tour = getTourBySlug(slug);
 
@@ -2680,7 +2682,7 @@ function getTourById(id) {
       .slice(0, 3);
 
     gridEl.innerHTML = related.map(t => `
-      <a class="related-card" href="preview-tour.html?slug=${t.slug}" aria-label="${escapeHTML(t.title)}">
+      <a class="related-card" href="preview-tour.html#${t.slug}" aria-label="${escapeHTML(t.title)}">
         <div class="related-card-img">
           <img src="${t.photos[0]}" alt="${escapeHTML(t.title)}" loading="lazy" />
         </div>
@@ -2868,6 +2870,15 @@ function getTourById(id) {
   } else {
     init();
   }
+
+  // Re-render when a related-tour hash link is clicked on the same page
+  window.addEventListener('hashchange', function () {
+    contentEl.style.display = 'none';
+    notFoundEl.style.display = 'none';
+    loadingEl.style.display = 'block';
+    init();
+    window.scrollTo(0, 0);
+  });
 
 })();
   </script>

@@ -2426,12 +2426,12 @@ function getTourById(id) {
     cardsEl.querySelectorAll('.tour-card').forEach(card => {
       card.addEventListener('click', function (e) {
         if (e.target.closest('.tour-card-wishlist')) return;
-        window.location.href = `preview-tour.html?slug=${this.dataset.slug}`;
+        window.location.href = `preview-tour.html#${this.dataset.slug}`;
       });
       card.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          window.location.href = `preview-tour.html?slug=${this.dataset.slug}`;
+          window.location.href = `preview-tour.html#${this.dataset.slug}`;
         }
       });
     });
