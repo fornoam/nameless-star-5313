@@ -713,11 +713,11 @@ input, select { font-family: inherit; }
 .photo-gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 320px 160px;
+  grid-template-rows: 220px 110px;
   gap: 6px;
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   background: #000;
 }
 
@@ -911,29 +911,34 @@ input, select { font-family: inherit; }
 .highlights-strip {
   background: var(--primary-light);
   border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 24px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
   border-left: 4px solid var(--primary);
 }
 
 .highlights-strip h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.4px;
   color: var(--primary);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-.highlights-strip ul { display: flex; flex-direction: column; gap: 8px; }
+/* Wrap highlights into two columns on desktop to stay compact */
+.highlights-strip ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 24px;
+}
 
 .highlights-strip li {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  font-size: 14px;
+  gap: 7px;
+  font-size: 13px;
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .highlights-strip li::before {
@@ -1488,18 +1493,23 @@ input, select { font-family: inherit; }
     order: -1;
   }
 
+  /* Mobile gallery: main image + one row of two thumbs */
   .photo-gallery {
-    grid-template-columns: 1fr;
-    grid-template-rows: 240px 120px 120px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 90px;
   }
 
-  .gallery-main { grid-row: 1 / 2; }
+  .gallery-main { grid-row: 1 / 2; grid-column: 1 / 3; }
+
+  .gallery-thumb:nth-child(n+4) { display: none; }
 
   .inclusions-grid { grid-template-columns: 1fr; }
 
   .reviews-summary { flex-direction: column; gap: 20px; }
 
-  .tour-title { font-size: 22px; }
+  .tour-title { font-size: 20px; }
+
+  .highlights-strip ul { grid-template-columns: 1fr; }
 
   .search-hero h1 { font-size: 24px; }
 
@@ -1511,7 +1521,7 @@ input, select { font-family: inherit; }
 
   .header-search { display: none; }
 
-  .tour-quick-stats { gap: 12px; }
+  .tour-quick-stats { gap: 10px; flex-wrap: wrap; }
 
   .lightbox-prev { left: -54px; }
   .lightbox-next { right: -54px; }
@@ -1526,7 +1536,16 @@ input, select { font-family: inherit; }
 
   .booking-price { font-size: 24px; }
 
-  .photo-gallery { grid-template-rows: 220px 100px 100px; }
+  .tour-title { font-size: 18px; }
+
+  /* Compact gallery on small phones: just the main image */
+  .photo-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: 190px;
+  }
+
+  .gallery-thumb { display: none; }
+  .gallery-main { grid-row: 1; grid-column: 1; }
 }
 
 /* ====================================================
