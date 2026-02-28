@@ -876,7 +876,8 @@ input, select { font-family: inherit; }
 .tour-detail-main {}
 
 /* ---------- Tour Header ---------- */
-.tour-header { margin-bottom: 24px; }
+/* When tour-header sits above the gallery, reduce gap into the gallery */
+.tour-header { margin-bottom: 16px; }
 
 .tour-header-meta {
   display: flex;
@@ -1675,6 +1676,15 @@ input, select { font-family: inherit; }
           <span class="breadcrumb-sep" aria-hidden="true">›</span>
           <span id="bc-title" class="breadcrumb-current" aria-current="page"></span>
         </nav>
+        <div class="tour-header">
+          <div class="tour-header-meta">
+            <span class="badge" id="tour-category-badge"></span>
+            <span id="tour-location-badge" style="font-size:13px; color:#636e72; display:flex; align-items:center; gap:3px;"></span>
+          </div>
+          <h1 class="tour-title" id="tour-title"></h1>
+          <div class="tour-quick-stats" id="tour-quick-stats"></div>
+          <div class="rating-row" id="tour-rating-row"></div>
+        </div>
       </div>
       <div class="container">
         <div class="photo-gallery" id="photo-gallery" role="region" aria-label="Tour photo gallery"></div>
@@ -1682,15 +1692,6 @@ input, select { font-family: inherit; }
       <div class="container">
         <div class="tour-detail-layout">
           <div class="tour-detail-main">
-            <div class="tour-header">
-              <div class="tour-header-meta">
-                <span class="badge" id="tour-category-badge"></span>
-                <span id="tour-location-badge" style="font-size:13px; color:#636e72; display:flex; align-items:center; gap:3px;"></span>
-              </div>
-              <h1 class="tour-title" id="tour-title"></h1>
-              <div class="tour-quick-stats" id="tour-quick-stats"></div>
-              <div class="rating-row" id="tour-rating-row"></div>
-            </div>
             <div class="highlights-strip" id="highlights-strip">
               <h3>Tour Highlights</h3>
               <ul id="highlights-list"></ul>

@@ -54,7 +54,7 @@
     <!-- Tour content (hidden until populated) -->
     <div id="tour-content" style="display:none;">
 
-      <!-- Breadcrumb -->
+      <!-- Breadcrumb + Tour Title (above gallery so title is always above the fold) -->
       <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="tours.html">Tours</a>
@@ -63,6 +63,23 @@
           <span class="breadcrumb-sep" aria-hidden="true">›</span>
           <span id="bc-title" class="breadcrumb-current" aria-current="page"></span>
         </nav>
+
+        <div class="tour-header">
+          <div class="tour-header-meta">
+            <span class="badge" id="tour-category-badge"></span>
+            <span id="tour-location-badge" style="font-size:13px; color:#636e72; display:flex; align-items:center; gap:3px;"></span>
+          </div>
+
+          <h1 class="tour-title" id="tour-title"></h1>
+
+          <div class="tour-quick-stats" id="tour-quick-stats">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="rating-row" id="tour-rating-row">
+            <!-- Populated by JS -->
+          </div>
+        </div>
       </div>
 
       <!-- Photo Gallery -->
@@ -78,24 +95,6 @@
 
           <!-- ====== MAIN CONTENT ====== -->
           <div class="tour-detail-main">
-
-            <!-- Tour Header -->
-            <div class="tour-header">
-              <div class="tour-header-meta">
-                <span class="badge" id="tour-category-badge"></span>
-                <span id="tour-location-badge" style="font-size:13px; color:#636e72; display:flex; align-items:center; gap:3px;"></span>
-              </div>
-
-              <h1 class="tour-title" id="tour-title"></h1>
-
-              <div class="tour-quick-stats" id="tour-quick-stats">
-                <!-- Populated by JS -->
-              </div>
-
-              <div class="rating-row" id="tour-rating-row">
-                <!-- Populated by JS -->
-              </div>
-            </div>
 
             <!-- Highlights Strip -->
             <div class="highlights-strip" id="highlights-strip">
