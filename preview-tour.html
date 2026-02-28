@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Tour Details | WanderDay</title>
+  <meta name="description" id="page-desc" content="Day tour details, itinerary, inclusions, and booking." />
+  <style>
+/* ====================================================
+   OTA Day Tours — Shared Stylesheet
+   ==================================================== */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --primary: #FF6B35;
+  --primary-dark: #e85a24;
+  --primary-light: #fff3ef;
+  --secondary: #1e2a3a;
+  --accent: #00b894;
+  --accent-light: #e8f8f5;
+  --yellow: #f9ca24;
+  --danger: #e74c3c;
+  --bg: #f4f6f9;
+  --card-bg: #ffffff;
+  --text: #2d3436;
+  --text-muted: #636e72;
+  --text-light: #b2bec3;
+  --border: #e0e5ec;
+  --border-light: #f1f3f8;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
+  --shadow: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --transition: 0.2s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+input, select { font-family: inherit; }
+
+/* ---------- Utility ---------- */
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+.flex { display: flex; align-items: center; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.badge-primary { background: var(--primary); color: #fff; }
+.badge-secondary { background: var(--secondary); color: #fff; }
+.badge-outline { border: 1px solid var(--border); color: var(--text-muted); background: #fff; }
+.badge-accent { background: var(--accent); color: #fff; }
+.badge-featured { background: var(--yellow); color: var(--secondary); }
+
+/* ---------- Stars ---------- */
+.stars {
+  color: var(--yellow);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rating-value {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.rating-count {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(255,107,53,0.35);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary-light);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #283547;
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: var(--radius);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+/* ====================================================
+   HEADER / NAV
+   ==================================================== */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 24px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.header-logo svg {
+  width: 28px;
+  height: 28px;
+}
+
+.header-logo span { color: var(--secondary); }
+
+.header-search {
+  flex: 1;
+  max-width: 480px;
+  position: relative;
+}
+
+.header-search input {
+  width: 100%;
+  padding: 9px 16px 9px 42px;
+  border: 1.5px solid var(--border);
+  border-radius: 30px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition);
+  background: var(--bg);
+}
+
+.header-search input:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+.header-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.header-nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background var(--transition);
+}
+
+.header-nav a:hover { color: var(--primary); background: var(--primary-light); }
+
+/* ====================================================
+   SEARCH HERO BANNER
+   ==================================================== */
+.search-hero {
+  background: linear-gradient(135deg, var(--secondary) 0%, #2d4a6e 100%);
+  padding: 48px 0;
+  color: #fff;
+}
+
+.search-hero h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.search-hero p {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 28px;
+}
+
+.search-form {
+  display: flex;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 8px;
+  gap: 8px;
+  align-items: center;
+  box-shadow: var(--shadow-lg);
+  flex-wrap: wrap;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px;
+  flex: 1;
+  min-width: 130px;
+  border-right: 1px solid var(--border);
+}
+
+.search-field:last-of-type { border-right: none; }
+
+.search-field label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.search-field input,
+.search-field select {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  background: transparent;
+  padding: 0;
+}
+
+.search-form .btn-primary {
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+/* ====================================================
+   RESULTS LAYOUT
+   ==================================================== */
+.results-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  padding: 32px 0;
+  align-items: start;
+}
+
+/* ---------- Filters Sidebar ---------- */
+.filters-sidebar {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 24px;
+  position: sticky;
+  top: 80px;
+}
+
+.filters-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filters-clear {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.filter-group {
+  border-top: 1px solid var(--border-light);
+  padding: 16px 0;
+}
+
+.filter-group-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.filter-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.filter-check-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.price-range-inputs {
+  display: flex;
+  gap: 8px;
+}
+
+.price-range-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-range-input label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.price-range-input input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.price-range-input input:focus { border-color: var(--primary); }
+
+.duration-slider {
+  width: 100%;
+  accent-color: var(--primary);
+  margin: 8px 0;
+}
+
+/* ---------- Results Column ---------- */
+.results-column {}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.results-count {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.results-count strong { color: var(--text); font-weight: 700; }
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.sort-control select {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  color: var(--text);
+  transition: border-color var(--transition);
+}
+
+.sort-control select:focus { border-color: var(--primary); }
+
+/* ---------- Tour Cards ---------- */
+.tour-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tour-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tour-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.tour-card-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.tour-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.tour-card:hover .tour-card-img img {
+  transform: scale(1.05);
+}
+
+.tour-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.tour-card-wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.tour-card-wishlist:hover {
+  background: #fff;
+  transform: scale(1.1);
+}
+
+.tour-card-wishlist.active { color: var(--danger); }
+
+.tour-card-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tour-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.tour-card-location {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tour-card-category {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.tour-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.tour-card-title:hover { color: var(--primary); }
+
+.tour-card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tour-card-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.highlight-pill {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  background: var(--border-light);
+  border-radius: 20px;
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.highlight-pill::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+.tour-card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  gap: 16px;
+}
+
+.tour-card-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.tour-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.tour-stat svg, .tour-stat-icon {
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+.tour-card-price {
+  text-align: right;
+}
+
+.price-from {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.price-original {
+  font-size: 12px;
+  color: var(--text-light);
+  text-decoration: line-through;
+  margin-left: 4px;
+}
+
+.price-amount {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.price-per {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.no-results-icon { font-size: 48px; margin-bottom: 16px; }
+.no-results h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+
+/* ====================================================
+   TOUR PRODUCT PAGE
+   ==================================================== */
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 14px 0;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb-sep { opacity: 0.4; }
+.breadcrumb-current { color: var(--text); font-weight: 500; }
+
+/* ---------- Photo Gallery ---------- */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 320px 160px;
+  gap: 6px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: #000;
+}
+
+.gallery-main {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-thumb {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-main img,
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.gallery-main:hover img,
+.gallery-thumb:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-more-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background var(--transition);
+}
+
+.gallery-more-btn:hover { background: rgba(0,0,0,0.8); }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox-img-wrap {
+  max-width: 90vw;
+  max-height: 80vh;
+  position: relative;
+}
+
+.lightbox-img-wrap img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+.lightbox-prev { left: -70px; }
+.lightbox-next { right: -70px; }
+
+.lightbox-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  overflow-x: auto;
+  max-width: 90vw;
+  padding: 4px;
+}
+
+.lightbox-thumbs img {
+  width: 64px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity var(--transition);
+  flex-shrink: 0;
+}
+
+.lightbox-thumbs img.active,
+.lightbox-thumbs img:hover { opacity: 1; }
+
+/* ---------- Tour Detail Layout ---------- */
+.tour-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 40px;
+  align-items: start;
+  padding-bottom: 64px;
+}
+
+.tour-detail-main {}
+
+/* ---------- Tour Header ---------- */
+.tour-header { margin-bottom: 24px; }
+
+.tour-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.tour-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+
+.tour-quick-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.quick-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.quick-stat-icon { font-size: 15px; }
+
+.quick-stat strong { color: var(--text); font-weight: 600; }
+
+/* ---------- Highlights Strip ---------- */
+.highlights-strip {
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border-left: 4px solid var(--primary);
+}
+
+.highlights-strip h3 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.highlights-strip ul { display: flex; flex-direction: column; gap: 8px; }
+
+.highlights-strip li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.highlights-strip li::before {
+  content: '✓';
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+  background: none;
+  cursor: pointer;
+}
+
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ---------- Overview Tab ---------- */
+.tour-description {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+/* ---------- Itinerary Tab ---------- */
+.itinerary { display: flex; flex-direction: column; gap: 0; }
+
+.itinerary-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.itinerary-item:last-child { border-bottom: none; }
+
+.itinerary-time {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: right;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.itinerary-dot {
+  position: absolute;
+  left: 104px;
+  top: 24px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.itinerary-line {
+  position: absolute;
+  left: 108px;
+  top: 34px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--border);
+}
+
+.itinerary-item:last-child .itinerary-line { display: none; }
+
+.itinerary-content { padding-left: 20px; }
+
+.itinerary-activity {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.itinerary-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Inclusions Tab ---------- */
+.inclusions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.inclusions-section h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inclusions-list { display: flex; flex-direction: column; gap: 10px; }
+
+.inclusions-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.inc-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.inc-yes { color: var(--accent); }
+.inc-no { color: var(--danger); }
+
+/* ---------- Reviews Tab ---------- */
+.reviews-summary {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.reviews-big-score {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.reviews-big-number {
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.reviews-big-stars { font-size: 20px; margin-bottom: 4px; }
+
+.reviews-big-count {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.reviews-breakdown { flex: 1; }
+
+.rating-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.rating-bar-label { font-size: 13px; color: var(--text-muted); width: 32px; text-align: right; }
+
+.rating-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  background: var(--yellow);
+  border-radius: 4px;
+}
+
+.rating-bar-pct { font-size: 13px; color: var(--text-muted); width: 32px; }
+
+.review-cards { display: flex; flex-direction: column; gap: 20px; }
+
+.review-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-author { font-weight: 700; font-size: 14px; }
+.review-date { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.review-stars { margin-left: auto; }
+
+.review-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+/* ---------- Meeting Point ---------- */
+.meeting-point-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 28px;
+}
+
+.meeting-point-section h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.meeting-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.meeting-icon { font-size: 18px; flex-shrink: 0; }
+
+/* ====================================================
+   BOOKING WIDGET (Sticky Sidebar)
+   ==================================================== */
+.booking-widget {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: sticky;
+  top: 80px;
+  box-shadow: var(--shadow);
+}
+
+.booking-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.booking-price {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.booking-price-per {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.booking-original-price {
+  font-size: 15px;
+  color: var(--text-light);
+  text-decoration: line-through;
+}
+
+.booking-saving {
+  font-size: 12px;
+  background: #fef9e7;
+  color: #b7950b;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.booking-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.booking-form { display: flex; flex-direction: column; gap: 12px; }
+
+.booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-field label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+}
+
+.booking-field input,
+.booking-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  background: var(--bg);
+  transition: border-color var(--transition);
+}
+
+.booking-field input:focus,
+.booking-field select:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+.booking-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 4px 0 16px;
+}
+
+.booking-total-label { font-size: 14px; font-weight: 600; color: var(--text); }
+.booking-total-value { font-size: 18px; font-weight: 800; color: var(--text); }
+
+.booking-book-btn {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+  margin-bottom: 12px;
+}
+
+.booking-book-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 6px 16px rgba(255,107,53,0.35);
+  transform: translateY(-1px);
+}
+
+.booking-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.booking-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.booking-meta-item-icon { font-size: 14px; }
+
+/* ---------- Cancellation Policy (Widget) ---------- */
+.cancellation-info {
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: #00695c;
+}
+
+.cancellation-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* ====================================================
+   RELATED TOURS SECTION
+   ==================================================== */
+.related-section {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+
+.related-section h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.related-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.related-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.related-card-img {
+  height: 160px;
+  overflow: hidden;
+}
+
+.related-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.related-card:hover .related-card-img img { transform: scale(1.05); }
+
+.related-card-body {
+  padding: 14px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.related-card-title { font-size: 14px; font-weight: 700; line-height: 1.35; }
+.related-card-location { font-size: 12px; color: var(--text-muted); }
+.related-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+.related-card-rating { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+.related-card-price { font-size: 16px; font-weight: 800; color: var(--primary); }
+
+/* ====================================================
+   FOOTER
+   ==================================================== */
+.site-footer {
+  background: var(--secondary);
+  color: rgba(255,255,255,0.65);
+  padding: 24px 0;
+  font-size: 13px;
+}
+
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-logo { color: #fff; font-weight: 700; font-size: 16px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a:hover { color: #fff; }
+
+/* ====================================================
+   RESPONSIVE
+   ==================================================== */
+@media (max-width: 1024px) {
+  .results-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+  }
+
+  .tour-detail-layout {
+    grid-template-columns: 1fr 320px;
+    gap: 28px;
+  }
+
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .results-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .filters-sidebar {
+    position: static;
+    display: none;
+  }
+
+  .filters-sidebar.mobile-open {
+    display: block;
+  }
+
+  .tour-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px auto;
+  }
+
+  .tour-card-img { min-height: 220px; }
+
+  .tour-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-widget {
+    position: static;
+    order: -1;
+  }
+
+  .photo-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: 240px 120px 120px;
+  }
+
+  .gallery-main { grid-row: 1 / 2; }
+
+  .inclusions-grid { grid-template-columns: 1fr; }
+
+  .reviews-summary { flex-direction: column; gap: 20px; }
+
+  .tour-title { font-size: 22px; }
+
+  .search-hero h1 { font-size: 24px; }
+
+  .search-form { flex-direction: column; }
+  .search-field { border-right: none; border-bottom: 1px solid var(--border); }
+  .search-field:last-of-type { border-bottom: none; }
+
+  .related-grid { grid-template-columns: 1fr; }
+
+  .header-search { display: none; }
+
+  .tour-quick-stats { gap: 12px; }
+
+  .lightbox-prev { left: -54px; }
+  .lightbox-next { right: -54px; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+
+  .tour-card-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .tour-card-price { text-align: left; }
+  .price-amount { font-size: 20px; }
+
+  .booking-price { font-size: 24px; }
+
+  .photo-gallery { grid-template-rows: 220px 100px 100px; }
+}
+
+/* ====================================================
+   MOBILE FILTER TOGGLE
+   ==================================================== */
+.mobile-filter-btn {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .mobile-filter-btn { display: flex; }
+}
+
+/* ====================================================
+   ANIMATIONS
+   ==================================================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tour-card, .related-card {
+  animation: fadeInUp 0.35s ease both;
+}
+
+.tour-card:nth-child(2) { animation-delay: 0.05s; }
+.tour-card:nth-child(3) { animation-delay: 0.10s; }
+.tour-card:nth-child(4) { animation-delay: 0.15s; }
+.tour-card:nth-child(5) { animation-delay: 0.20s; }
+.tour-card:nth-child(6) { animation-delay: 0.25s; }
+.tour-card:nth-child(7) { animation-delay: 0.30s; }
+.tour-card:nth-child(8) { animation-delay: 0.35s; }
+
+/* ====================================================
+   LOADING SKELETON
+   ==================================================== */
+.skeleton {
+  background: linear-gradient(90deg, var(--border-light) 25%, #e8edf4 50%, var(--border-light) 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ====================================================
+   TOAST NOTIFICATION
+   ==================================================== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--secondary);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 500;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast.success { background: var(--accent); }
+.toast.error { background: var(--danger); }
+
+/* ====================================================
+   DIFFICULTY BADGES
+   ==================================================== */
+.difficulty-easy { background: #e8f8f1; color: #1a7a4a; }
+.difficulty-moderate { background: #fef3e0; color: #b45309; }
+.difficulty-hard { background: #fde8e8; color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="preview-search.html" class="header-logo" aria-label="WanderDay home">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="14" cy="14" r="13" fill="#FF6B35" opacity="0.15"/>
+          <path d="M14 4C9.58 4 6 7.58 6 12c0 6 8 16 8 16s8-10 8-16c0-4.42-3.58-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z" fill="#FF6B35"/>
+        </svg>
+        Wander<span>Day</span>
+      </a>
+      <div class="header-search" role="search">
+        <span class="header-search-icon" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input type="search" placeholder="Search destinations or tours…" aria-label="Search tours" id="header-search" />
+      </div>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="preview-search.html">All Tours</a>
+        <a href="#">Destinations</a>
+        <a href="#" class="btn btn-primary btn-sm">Sign In</a>
+      </nav>
+    </div>
+  </header>
+  <main id="tour-main">
+    <div id="loading-state" style="text-align:center; padding: 80px 20px; color: #636e72;">
+      <div style="font-size: 36px; margin-bottom: 16px;">⏳</div>
+      <p>Loading tour details…</p>
+    </div>
+    <div id="tour-content" style="display:none;">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="preview-search.html">Tours</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span id="bc-location" class="breadcrumb-link"></span>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span id="bc-title" class="breadcrumb-current" aria-current="page"></span>
+        </nav>
+      </div>
+      <div class="container">
+        <div class="photo-gallery" id="photo-gallery" role="region" aria-label="Tour photo gallery"></div>
+      </div>
+      <div class="container">
+        <div class="tour-detail-layout">
+          <div class="tour-detail-main">
+            <div class="tour-header">
+              <div class="tour-header-meta">
+                <span class="badge" id="tour-category-badge"></span>
+                <span id="tour-location-badge" style="font-size:13px; color:#636e72; display:flex; align-items:center; gap:3px;"></span>
+              </div>
+              <h1 class="tour-title" id="tour-title"></h1>
+              <div class="tour-quick-stats" id="tour-quick-stats"></div>
+              <div class="rating-row" id="tour-rating-row"></div>
+            </div>
+            <div class="highlights-strip" id="highlights-strip">
+              <h3>Tour Highlights</h3>
+              <ul id="highlights-list"></ul>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Tour information tabs">
+              <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview" data-tab="overview">Overview</button>
+              <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-itinerary" id="tab-btn-itinerary" data-tab="itinerary">Itinerary</button>
+              <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-inclusions" id="tab-btn-inclusions" data-tab="inclusions">Inclusions</button>
+              <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-reviews" id="tab-btn-reviews" data-tab="reviews">Reviews</button>
+            </div>
+            <div class="tab-panel active" id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+              <p class="tour-description" id="tour-description"></p>
+              <div class="meeting-point-section">
+                <h3>📍 Meeting Point</h3>
+                <div class="meeting-address">
+                  <span class="meeting-icon" aria-hidden="true">🗺</span>
+                  <div>
+                    <div id="meeting-point-text" style="font-weight:500; color:#2d3436; margin-bottom:4px;"></div>
+                    <div style="font-size:13px; color:#636e72;">Your guide will hold a WanderDay sign at the meeting point. Arrive 10 minutes early.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-panel" id="tab-itinerary" role="tabpanel" aria-labelledby="tab-btn-itinerary">
+              <div class="itinerary" id="itinerary-list"></div>
+            </div>
+            <div class="tab-panel" id="tab-inclusions" role="tabpanel" aria-labelledby="tab-btn-inclusions">
+              <div class="inclusions-grid">
+                <div class="inclusions-section"><h3>✅ What's Included</h3><ul class="inclusions-list" id="inclusions-list"></ul></div>
+                <div class="inclusions-section"><h3>❌ What's Not Included</h3><ul class="inclusions-list" id="exclusions-list"></ul></div>
+              </div>
+              <div class="meeting-point-section" style="margin-top:24px;">
+                <h3>📋 Cancellation Policy</h3>
+                <p id="cancellation-text" style="font-size:14px; color:#636e72; line-height:1.65; margin-top:8px;"></p>
+              </div>
+            </div>
+            <div class="tab-panel" id="tab-reviews" role="tabpanel" aria-labelledby="tab-btn-reviews">
+              <div class="reviews-summary" id="reviews-summary"></div>
+              <div class="review-cards" id="review-cards"></div>
+            </div>
+          </div>
+          <aside aria-label="Booking widget">
+            <div class="booking-widget" id="booking-widget">
+              <div class="booking-price-row" id="booking-price-row"></div>
+              <div class="booking-rating-row" id="booking-rating-row"></div>
+              <form class="booking-form" id="booking-form" novalidate>
+                <div class="booking-field">
+                  <label for="book-date">Select Date</label>
+                  <input type="date" id="book-date" required />
+                </div>
+                <div class="booking-field">
+                  <label for="book-guests">Number of Guests</label>
+                  <select id="book-guests" required>
+                    <option value="1">1 guest</option>
+                    <option value="2" selected>2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                    <option value="5">5 guests</option>
+                    <option value="6">6 guests</option>
+                    <option value="8">8 guests</option>
+                    <option value="10">10 guests</option>
+                  </select>
+                </div>
+                <div class="booking-total-row">
+                  <span class="booking-total-label">Total</span>
+                  <span class="booking-total-value" id="booking-total">$0</span>
+                </div>
+                <button type="submit" class="booking-book-btn" id="book-btn">Book Now — Check Availability</button>
+              </form>
+              <div class="booking-meta">
+                <div class="booking-meta-item"><span class="booking-meta-item-icon">✅</span>Free cancellation (see policy)</div>
+                <div class="booking-meta-item"><span class="booking-meta-item-icon">💳</span>Reserve now, pay later</div>
+                <div class="booking-meta-item"><span class="booking-meta-item-icon">🔒</span>Secure checkout — 256-bit SSL</div>
+                <div class="booking-meta-item"><span class="booking-meta-item-icon">🗣</span><span id="booking-languages"></span></div>
+              </div>
+              <div class="cancellation-info" id="booking-cancellation-info">
+                <span class="cancellation-icon">🌿</span>
+                <span id="cancellation-info-text"></span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <section class="related-section" aria-label="You might also like">
+        <div class="container">
+          <h2>You Might Also Like</h2>
+          <div class="related-grid" id="related-grid"></div>
+        </div>
+      </section>
+    </div>
+    <div id="not-found-state" style="display:none; text-align:center; padding: 80px 20px; color: #636e72;">
+      <div style="font-size: 48px; margin-bottom: 16px;">🗺</div>
+      <h2 style="font-size:22px; font-weight:800; color:#2d3436; margin-bottom:8px;">Tour Not Found</h2>
+      <p style="margin-bottom:24px;">The tour you're looking for doesn't exist.</p>
+      <a href="preview-search.html" class="btn btn-primary">Browse All Tours</a>
+    </div>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-logo">WanderDay</div>
+      <div class="footer-links"><a href="#">About</a><a href="#">Help</a><a href="#">Terms</a><a href="#">Privacy</a></div>
+      <div>&copy; 2026 WanderDay. All rights reserved.</div>
+    </div>
+  </footer>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close gallery">✕</button>
+    <div class="lightbox-img-wrap" style="position:relative;">
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous photo">‹</button>
+      <img src="" alt="" id="lightbox-img" />
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next photo">›</button>
+    </div>
+    <div class="lightbox-thumbs" id="lightbox-thumbs" role="list" aria-label="Photo thumbnails"></div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+const TOURS_DATA = [
+  {
+    id: "1",
+    slug: "bali-rice-terraces-temple-tour",
+    title: "Bali Rice Terraces & Sacred Temple Day Tour",
+    shortDescription: "Explore the iconic Tegallalang rice terraces and Bali's most sacred temples on this intimate small-group guided tour.",
+    description: "Immerse yourself in Bali's breathtaking natural beauty and rich spiritual culture on this full-day guided adventure. Wind through emerald-green terraced rice fields, witness ancient purification rituals at a 10th-century holy spring temple, and watch the day wind down beside a sea temple perched dramatically on a coastal rock. Your expert local guide brings Balinese history and mythology to life throughout the day, while the small group size ensures a personal, unhurried experience.",
+    duration: "10 hours",
+    durationHours: 10,
+    maxGroupSize: 12,
+    difficulty: "Easy",
+    price: 89,
+    originalPrice: 120,
+    rating: 4.8,
+    reviewCount: 347,
+    location: "Bali, Indonesia",
+    category: "Cultural",
+    meetingPoint: "Kuta Beach Hotel Lobby, Jl. Pantai Kuta, Kuta, Badung Regency",
+    photos: [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80",
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&q=80",
+      "https://images.unsplash.com/photo-1604999333679-b86d54738315?w=800&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80"
+    ],
+    highlights: [
+      "Walk the narrow paths of the UNESCO-listed Tegallalang rice terraces",
+      "Witness traditional purification rituals at Tirta Empul holy spring",
+      "Explore the iconic Tanah Lot sea temple at sunset",
+      "Traditional Balinese lunch with panoramic rice field views",
+      "Small group of max 12 for a personalised experience"
+    ],
+    inclusions: [
+      "Air-conditioned vehicle and driver",
+      "English-speaking certified local guide",
+      "Traditional Balinese lunch",
+      "All entrance fees and temple donations",
+      "Bottled water throughout the day",
+      "Temple sarongs (if required)"
+    ],
+    exclusions: [
+      "Hotel pickup outside Kuta/Seminyak (available for extra charge)",
+      "Personal expenses and souvenirs",
+      "Alcoholic beverages",
+      "Gratuities (optional)"
+    ],
+    schedule: [
+      { time: "8:00 AM", activity: "Hotel Pickup & Welcome", description: "Meet your guide at the lobby. Enjoy a brief introduction to the day's itinerary as you head north through Bali's lush countryside." },
+      { time: "9:30 AM", activity: "Tegallalang Rice Terraces", description: "Arrive at the iconic UNESCO-listed terraces. Walk along narrow paths through emerald-green paddies and enjoy stunning photo opportunities with the valley backdrop." },
+      { time: "11:00 AM", activity: "Tirta Empul Holy Spring Temple", description: "Visit Bali's most sacred water temple, built in 926 AD. Watch or participate in the traditional melukat purification ritual in the natural spring pools." },
+      { time: "12:30 PM", activity: "Balinese Lunch", description: "Enjoy an authentic Balinese buffet lunch at a local restaurant with panoramic rice field views. Savour dishes like nasi campur, sate, and fresh tropical fruits." },
+      { time: "2:00 PM", activity: "Ubud Town Exploration", description: "Explore Ubud's famous art market and streets. Browse hand-crafted batik textiles, wood carvings, and silver jewellery. Free time for shopping or a coffee at a local cafe." },
+      { time: "4:00 PM", activity: "Tanah Lot Sea Temple", description: "Watch the late afternoon light fall over this iconic sea temple perched on a rocky coastal outcrop. The view is spectacular and perfect for photography." },
+      { time: "6:00 PM", activity: "Return Hotel Drop-off", description: "Comfortable drop-off at your accommodation in the Kuta/Seminyak area after a wonderful day." }
+    ],
+    reviews: [
+      { name: "Sarah M.", date: "January 2026", rating: 5, comment: "Absolutely incredible day! Our guide Wayan was so knowledgeable and funny. The rice terraces were breathtaking. Highly recommend to anyone visiting Bali!", avatar: "S" },
+      { name: "James K.", date: "December 2025", rating: 5, comment: "Perfect blend of nature and culture. The small group size made it feel very personal. Lunch was delicious and the temples were fascinating.", avatar: "J" },
+      { name: "Maria G.", date: "November 2025", rating: 4, comment: "Great tour overall. Only minor issue was traffic getting to Tanah Lot at sunset, but the temple itself was absolutely worth the wait.", avatar: "M" },
+      { name: "Tom R.", date: "October 2025", rating: 5, comment: "Best day of our whole Bali trip. Guide was excellent, timing was perfect, and the scenery was out of this world. Will be booking again.", avatar: "T" }
+    ],
+    categories: ["Cultural", "Nature", "Sightseeing"],
+    languages: ["English", "Spanish", "French"],
+    cancellationPolicy: "Free cancellation up to 24 hours before the tour starts. No refund for cancellations made less than 24 hours before start time.",
+    tags: ["Bali", "Rice Terraces", "Temples", "Cultural", "Nature"],
+    featured: true
+  },
+  {
+    id: "2",
+    slug: "kyoto-temples-gardens-tour",
+    title: "Kyoto Ancient Temples & Bamboo Grove Day Tour",
+    shortDescription: "Journey through Kyoto's golden pavilions, zen rock gardens, and the enchanting Arashiyama bamboo grove with a local expert guide.",
+    description: "Step back in time on this carefully curated tour of Kyoto's most iconic spiritual and natural landmarks. From the golden shimmer of Kinkaku-ji to the meditative stillness of Ryoan-ji's rock garden, and the towering green stalks of Arashiyama's bamboo grove — every moment of this day is designed to reveal the soul of Japan's ancient capital. Your knowledgeable guide shares centuries of history, temple etiquette, and the philosophy behind each remarkable site.",
+    duration: "9 hours",
+    durationHours: 9,
+    maxGroupSize: 10,
+    difficulty: "Easy",
+    price: 95,
+    originalPrice: 130,
+    rating: 4.9,
+    reviewCount: 512,
+    location: "Kyoto, Japan",
+    category: "Cultural",
+    meetingPoint: "Kyoto Station Central Gate (Hachijo Exit), Main Concourse",
+    photos: [
+      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80",
+      "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=800&q=80"
+    ],
+    highlights: [
+      "Photograph the golden Kinkaku-ji (Golden Pavilion) reflected in its mirror pond",
+      "Contemplate Ryoan-ji's famous 15-stone Zen rock garden",
+      "Stroll the iconic Arashiyama bamboo grove",
+      "Visit Fushimi Inari's endless torii gate tunnels",
+      "Traditional matcha tea ceremony experience included"
+    ],
+    inclusions: [
+      "Professional English-speaking guide",
+      "All entrance fees to listed temples",
+      "Traditional matcha tea ceremony",
+      "IC transport card for local travel",
+      "Detailed cultural and historical commentary",
+      "Small-group experience (max 10 guests)"
+    ],
+    exclusions: [
+      "Lunch (restaurant recommendations provided)",
+      "Hotel pickup/drop-off",
+      "Personal purchases at markets",
+      "Gratuities (optional)"
+    ],
+    schedule: [
+      { time: "8:30 AM", activity: "Meeting at Kyoto Station", description: "Meet your guide at the Hachijo Exit. Receive your IC card and a brief overview of the day's itinerary." },
+      { time: "9:00 AM", activity: "Kinkaku-ji (Golden Pavilion)", description: "Visit the iconic three-storey golden pavilion, one of Japan's most photographed structures. Walk the tranquil garden surrounding the mirror pond." },
+      { time: "10:30 AM", activity: "Ryoan-ji Zen Temple", description: "Experience the world-famous Karesansui (dry landscape) rock garden. Sit quietly and contemplate the 15 stones that can never all be viewed simultaneously." },
+      { time: "12:00 PM", activity: "Nishiki Market", description: "Explore Kyoto's 'kitchen' — a narrow covered market with 400 years of history. Sample local street foods and browse fresh produce and pickled delicacies." },
+      { time: "1:30 PM", activity: "Matcha Tea Ceremony", description: "Participate in a traditional tea ceremony hosted by a certified tea master. Learn the philosophy of wabi-sabi and enjoy hand-whisked matcha with wagashi sweets." },
+      { time: "3:00 PM", activity: "Arashiyama Bamboo Grove", description: "Walk the famous pathway through towering bamboo stalks. The grove creates a breathtaking natural tunnel of swaying green light." },
+      { time: "4:30 PM", activity: "Fushimi Inari Shrine", description: "Hike the lower trails through thousands of vermillion torii gates winding up the sacred Mount Inari. Spectacular for photography as the evening light filters through." },
+      { time: "6:00 PM", activity: "End of Tour", description: "Tour concludes at Fushimi Inari Station with easy access back to central Kyoto." }
+    ],
+    reviews: [
+      { name: "Elena P.", date: "February 2026", rating: 5, comment: "Our guide Kenji was phenomenal — his knowledge of Japanese history and culture was extraordinary. The tea ceremony was a highlight I'll never forget.", avatar: "E" },
+      { name: "David L.", date: "January 2026", rating: 5, comment: "Perfect pacing throughout the day. Never felt rushed but covered so much. The bamboo grove early afternoon was magical with softer light.", avatar: "D" },
+      { name: "Yuki A.", date: "December 2025", rating: 5, comment: "Even as a Japanese person, I learned so much about my own culture! The guide's storytelling made ancient history feel vivid and relevant.", avatar: "Y" },
+      { name: "Claire B.", date: "November 2025", rating: 4, comment: "Wonderful tour. Only wish we had a little more time at Fushimi Inari — could have easily spent another hour there.", avatar: "C" }
+    ],
+    categories: ["Cultural", "History", "Nature"],
+    languages: ["English", "Japanese", "Mandarin"],
+    cancellationPolicy: "Free cancellation up to 48 hours before the tour starts. 50% refund for cancellations 24–48 hours before start time.",
+    tags: ["Kyoto", "Japan", "Temples", "Bamboo", "Tea Ceremony"],
+    featured: true
+  },
+  {
+    id: "3",
+    slug: "amalfi-coast-boat-hike-tour",
+    title: "Amalfi Coast Boat Trip & Scenic Hike Day Tour",
+    shortDescription: "Sail along the dramatic Amalfi coastline, swim in hidden sea caves, then hike the legendary Path of the Gods with breathtaking views.",
+    description: "Experience the Amalfi Coast from the best possible angles — from the sea and from high above. Depart by private boat from Positano, cruising past cliffside villages and into sea caves glowing with turquoise water. After a swim stop and on-board lunch, join your guide for the famous Sentiero degli Dei (Path of the Gods) hike, with panoramic views of the Tyrrhenian Sea that will leave you speechless.",
+    duration: "11 hours",
+    durationHours: 11,
+    maxGroupSize: 8,
+    difficulty: "Moderate",
+    price: 165,
+    originalPrice: 210,
+    rating: 4.9,
+    reviewCount: 203,
+    location: "Amalfi Coast, Italy",
+    category: "Adventure",
+    meetingPoint: "Positano Ferry Dock, Via Giovanni Marconi, Positano",
+    photos: [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1200&q=80",
+      "https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=800&q=80",
+      "https://images.unsplash.com/photo-1612528443702-f6741f70a049?w=800&q=80",
+      "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?w=800&q=80",
+      "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80"
+    ],
+    highlights: [
+      "Private boat cruise along the UNESCO-protected Amalfi Coast",
+      "Swim in turquoise sea caves and grottos",
+      "Hike the famous Path of the Gods (Sentiero degli Dei)",
+      "Lunch on board with local Campanian wines",
+      "Exclusive small group of maximum 8 guests"
+    ],
+    inclusions: [
+      "Private licensed boat with skipper",
+      "Certified mountain guide for hike",
+      "On-board lunch with local wines and water",
+      "Snorkelling equipment",
+      "National park entrance fee",
+      "Transfer from hike end point to Positano"
+    ],
+    exclusions: [
+      "Hotel transfers (available on request)",
+      "Travel insurance",
+      "Personal equipment (hiking shoes recommended)",
+      "Gratuities"
+    ],
+    schedule: [
+      { time: "9:00 AM", activity: "Boat Departure from Positano", description: "Board your private boat at the Positano dock. Meet your skipper and set sail along the coast towards the first highlights." },
+      { time: "9:30 AM", activity: "Grotta dello Smeraldo", description: "Enter the stunning Emerald Grotto, where daylight filters through an underwater cavity creating an ethereal green glow throughout the cave." },
+      { time: "10:30 AM", activity: "Swimming Stop & Snorkelling", description: "Anchor in a secluded cove with crystal-clear water. Jump in for a swim or snorkel among colourful Mediterranean fish and underwater rock formations." },
+      { time: "12:00 PM", activity: "Lunch on Board", description: "Enjoy a delicious spread of local bruschetta, fresh mozzarella, grilled vegetables, and seafood, paired with crisp Campanian white wine." },
+      { time: "1:30 PM", activity: "Arrive at Praiano", description: "Dock at Praiano village and meet your mountain guide for the second part of the day's adventure." },
+      { time: "2:00 PM", activity: "Path of the Gods Hike", description: "Hike the legendary Sentiero degli Dei — a 7.8 km trail carved into the cliffsides above the sea, with jaw-dropping panoramic views at every turn." },
+      { time: "5:00 PM", activity: "Arrive Nocelle & Transfer", description: "Complete the hike in the hilltop village of Nocelle. Enjoy a well-earned gelato before your transfer back down to Positano." },
+      { time: "6:00 PM", activity: "Return to Positano", description: "Arrive back in Positano, where the tour concludes at the ferry dock." }
+    ],
+    reviews: [
+      { name: "Francesca D.", date: "September 2025", rating: 5, comment: "Truly the best day of my Italian trip. The boat was beautiful, the hike was challenging but manageable, and the views were beyond anything I'd imagined.", avatar: "F" },
+      { name: "Michael T.", date: "August 2025", rating: 5, comment: "Our skipper Marco knew every hidden cove along the coast. The on-board lunch was exceptional — fresh, local, and generous. Worth every cent.", avatar: "M" },
+      { name: "Sophia R.", date: "July 2025", rating: 5, comment: "Path of the Gods lived up to its name completely. We went in summer — do bring sun protection and good shoes. The guide was funny and very safe.", avatar: "S" },
+      { name: "Alex H.", date: "June 2025", rating: 4, comment: "Spectacular experience overall. We got lucky with weather — check forecast before booking as the boat portion depends on sea conditions.", avatar: "A" }
+    ],
+    categories: ["Adventure", "Nature", "Water"],
+    languages: ["English", "Italian", "German"],
+    cancellationPolicy: "Free cancellation up to 72 hours before departure. Tours may be rescheduled due to adverse weather at no charge.",
+    tags: ["Amalfi", "Italy", "Boat", "Hiking", "Coast"],
+    featured: false
+  },
+  {
+    id: "4",
+    slug: "barcelona-gothic-tapas-tour",
+    title: "Barcelona Gothic Quarter & Evening Tapas Walking Tour",
+    shortDescription: "Uncover 2,000 years of hidden history in the Gothic Quarter's ancient lanes, then feast on authentic tapas and local wines with a local foodie guide.",
+    description: "Barcelona's Barri Gòtic (Gothic Quarter) is one of Europe's best-preserved medieval city centres, with layers of Roman, Moorish, and Gothic history waiting beneath every cobblestone. This expertly guided walking tour peels back the centuries, leading you to hidden plazas and secret corners most tourists never find. As evening falls, the tour transitions into a curated tapas crawl through neighbourhood bars handpicked by your local guide — no tourist traps here.",
+    duration: "5 hours",
+    durationHours: 5,
+    maxGroupSize: 14,
+    difficulty: "Easy",
+    price: 75,
+    originalPrice: 95,
+    rating: 4.7,
+    reviewCount: 628,
+    location: "Barcelona, Spain",
+    category: "Food & Culture",
+    meetingPoint: "Plaça de Sant Jaume (in front of City Hall main entrance)",
+    photos: [
+      "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1200&q=80",
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&q=80",
+      "https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&q=80",
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&q=80"
+    ],
+    highlights: [
+      "Walk the hidden lanes of the 2,000-year-old Gothic Quarter",
+      "Discover the original Roman city walls and temple ruins",
+      "Visit the stunning Barcelona Cathedral interior",
+      "Tapas crawl through three authentic neighbourhood bars",
+      "Taste 8+ traditional Catalan tapas with paired local wines"
+    ],
+    inclusions: [
+      "Expert local guide (historian and foodie)",
+      "Entry to Barcelona Cathedral",
+      "8+ tapas dishes across three bars",
+      "3 glasses of local wine or soft drinks",
+      "Written food and neighbourhood guide to take home",
+      "Headsets for clear hearing in busy streets"
+    ],
+    exclusions: [
+      "Additional drinks beyond the included allocation",
+      "Hotel pickup (central meeting point provided)",
+      "Transport between venues (all walking distance)"
+    ],
+    schedule: [
+      { time: "6:00 PM", activity: "Meet at Plaça de Sant Jaume", description: "Meet your guide and group in front of the historic City Hall. Brief introductions and an overview of the city's Roman origins." },
+      { time: "6:15 PM", activity: "Roman Ruins Walk", description: "Explore the remains of Barcino, the original Roman settlement — including intact 4th-century walls and the hidden Temple of Augustus." },
+      { time: "7:00 PM", activity: "Gothic Quarter Hidden Lanes", description: "Wander through Carrer del Bisbe, Plaça de Sant Felip Neri, and the Jewish quarter (El Call), hearing stories of merchants, inquisitions, and city life." },
+      { time: "7:45 PM", activity: "Barcelona Cathedral", description: "Enter the magnificent 13th-century Gothic cathedral. Visit the cloister with its famous geese pond, a tradition dating back 600 years." },
+      { time: "8:30 PM", activity: "First Tapas Bar — Pintxos", description: "Stop at a lively pintxos bar for the first round of bites: pan con tomate, jamón croquetas, and patatas bravas — washed down with cold Estrella Damm." },
+      { time: "9:15 PM", activity: "Second Bar — Catalan Classics", description: "Move to a neighbourhood bar for traditional Catalan tapas: escalivada, esqueixada de bacallà, and bombes, paired with a glass of Penedès white wine." },
+      { time: "10:00 PM", activity: "Third Bar — Vermouth & Dessert Tapas", description: "End the evening with artisanal vermouth and sweet tapas — crema catalana, mel i mató, and house-made churros. Toast to a perfect Barcelona evening." },
+      { time: "11:00 PM", activity: "Tour End", description: "Tour concludes in El Born neighbourhood, steps from the metro and Barcelona's best nightlife." }
+    ],
+    reviews: [
+      { name: "Olivia N.", date: "February 2026", rating: 5, comment: "Absolutely brilliant evening. Our guide Ana was passionate, funny and incredibly knowledgeable. The food bars were genuine local spots — no tourist menus in sight!", avatar: "O" },
+      { name: "Carlos V.", date: "January 2026", rating: 5, comment: "Did this with my partner for our anniversary. Perfect evening. History + incredible food. Couldn't fault a single thing about it.", avatar: "C" },
+      { name: "Rachel S.", date: "December 2025", rating: 4, comment: "Great tour, loved the food focus. The Gothic Quarter history was interesting but we wish the tapas crawl was slightly longer!", avatar: "R" },
+      { name: "Ben F.", date: "November 2025", rating: 5, comment: "Best food tour I've done in any city, anywhere. Third bar's vermouth selection was exceptional. Book this immediately.", avatar: "B" }
+    ],
+    categories: ["Food & Culture", "History", "Walking"],
+    languages: ["English", "Spanish", "Catalan"],
+    cancellationPolicy: "Free cancellation up to 24 hours before start time. No refunds for late cancellations.",
+    tags: ["Barcelona", "Spain", "Tapas", "Gothic", "Food"],
+    featured: true
+  },
+  {
+    id: "5",
+    slug: "santorini-sunset-caldera-cruise",
+    title: "Santorini Sunset Caldera Sailing Cruise",
+    shortDescription: "Sail the ancient volcanic caldera on a traditional Greek schooner, swim at the hot springs, and watch the famous Santorini sunset from the water.",
+    description: "Santorini's dramatic caldera is the heart of the island's mystique — a flooded volcanic crater surrounded by sheer black and white cliffsides. This semi-private sailing cruise takes you directly into the caldera's heart, with stops at the volcanic hot springs, the white-pumice beaches of Nea Kameni, and a perfectly timed position to watch the legendary Santorini sunset. Includes a BBQ dinner on deck and unlimited drinks.",
+    duration: "8 hours",
+    durationHours: 8,
+    maxGroupSize: 20,
+    difficulty: "Easy",
+    price: 145,
+    originalPrice: 180,
+    rating: 4.8,
+    reviewCount: 489,
+    location: "Santorini, Greece",
+    category: "Sailing",
+    meetingPoint: "Ammoudi Bay Harbour, below Oia village",
+    photos: [
+      "https://images.unsplash.com/photo-1507501336603-6e31db2be093?w=1200&q=80",
+      "https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800&q=80",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
+      "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80",
+      "https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?w=800&q=80"
+    ],
+    highlights: [
+      "Sail the dramatic Santorini caldera on a traditional schooner",
+      "Swim in the natural volcanic hot springs of Palea Kameni",
+      "Hike the volcanic crater of Nea Kameni island",
+      "Watch the world-famous Santorini sunset from the water",
+      "BBQ dinner on deck with unlimited wine, beer and soft drinks"
+    ],
+    inclusions: [
+      "Semi-private sailing cruise (max 20 guests)",
+      "BBQ dinner on board",
+      "Unlimited wine, beer and soft drinks",
+      "Snorkelling equipment",
+      "Towels",
+      "Guided volcanic island hike"
+    ],
+    exclusions: [
+      "Hotel transfer to/from Ammoudi Bay",
+      "Travel insurance",
+      "Premium spirits (available to purchase)",
+      "Gratuities"
+    ],
+    schedule: [
+      { time: "3:00 PM", activity: "Boarding at Ammoudi Bay", description: "Board the traditional Greek schooner. Meet the crew, enjoy a welcome drink, and set sail into the stunning caldera." },
+      { time: "4:00 PM", activity: "Nea Kameni Volcanic Island", description: "Dock at the active volcanic island. Hike the crater trail with your guide, learning about the island's fiery geological history." },
+      { time: "5:00 PM", activity: "Hot Springs Swimming", description: "Swim from the boat to the natural thermal hot springs at Palea Kameni. The iron-rich waters give a distinct orange tinge to the sea around them." },
+      { time: "6:00 PM", activity: "Thirassia Coastal Cruise", description: "Sail along the quiet, less-visited island of Thirassia with breathtaking views of the main caldera cliffs opposite." },
+      { time: "7:00 PM", activity: "BBQ Dinner on Deck", description: "Anchor at a prime position in the caldera for dinner: grilled meats, Greek salad, tzatziki, pita, and fresh catch of the day — with wine flowing freely." },
+      { time: "8:30 PM", activity: "Santorini Sunset", description: "Watch the legendary Santorini sunset paint the sky in shades of pink, orange and gold over the caldera. The most photographed moment in Greece." },
+      { time: "10:00 PM", activity: "Return to Ammoudi Bay", description: "Sail back under the stars to Ammoudi Bay as the village lights reflect on the calm water." }
+    ],
+    reviews: [
+      { name: "Isabella R.", date: "September 2025", rating: 5, comment: "Magical. There are no other words. The sunset from the water with wine in hand was the single most beautiful thing I've seen in my life.", avatar: "I" },
+      { name: "George P.", date: "August 2025", rating: 5, comment: "Excellent boat, great crew, and the BBQ was far better than I expected for a boat tour. Do NOT miss the hot springs stop.", avatar: "G" },
+      { name: "Lucy W.", date: "July 2025", rating: 5, comment: "Booked this for my partner's birthday. She cried watching the sunset. Absolutely perfect experience from start to finish.", avatar: "L" },
+      { name: "Andreas K.", date: "June 2025", rating: 4, comment: "Wonderful cruise. Hot springs were a bit crowded with other boats at peak season, but still a unique experience. Sunset made up for everything.", avatar: "A" }
+    ],
+    categories: ["Sailing", "Nature", "Romantic"],
+    languages: ["English", "Greek", "German"],
+    cancellationPolicy: "Free cancellation up to 48 hours before departure. Rescheduling available due to weather conditions.",
+    tags: ["Santorini", "Greece", "Sailing", "Sunset", "Caldera"],
+    featured: true
+  },
+  {
+    id: "6",
+    slug: "machu-picchu-full-day-tour",
+    title: "Machu Picchu Guided Full Day Tour from Cusco",
+    shortDescription: "Take the legendary Vistadome train to Aguas Calientes and explore the ancient Incan citadel of Machu Picchu with an expert archaeologist guide.",
+    description: "No trip to South America is complete without standing at the gates of Machu Picchu, the 15th-century Incan citadel perched dramatically in the Andes clouds. This all-inclusive full-day tour takes care of every logistical detail — from the scenic Vistadome train winding through the Sacred Valley to your expert guide's stories of Incan astronomy, architecture, and the mystery of why this city was abandoned. It's the day of a lifetime.",
+    duration: "14 hours",
+    durationHours: 14,
+    maxGroupSize: 16,
+    difficulty: "Moderate",
+    price: 299,
+    originalPrice: 380,
+    rating: 4.9,
+    reviewCount: 731,
+    location: "Cusco, Peru",
+    category: "Heritage",
+    meetingPoint: "Cusco Poroy Train Station, Poroy District (30 min from Cusco city centre)",
+    photos: [
+      "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=1200&q=80",
+      "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=800&q=80",
+      "https://images.unsplash.com/photo-1531065208531-4036c0dba3ca?w=800&q=80",
+      "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?w=800&q=80",
+      "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80"
+    ],
+    highlights: [
+      "Round-trip on the scenic Vistadome panoramic train through the Andes",
+      "Skip-the-line entry to Machu Picchu",
+      "3-hour tour with a certified archaeologist guide",
+      "Optional Sun Gate hike (Inti Punku) with panoramic citadel views",
+      "Buffet lunch at Belmond Sanctuary Lodge (upgrade option)"
+    ],
+    inclusions: [
+      "Round-trip Vistadome panoramic train (Poroy–Aguas Calientes)",
+      "Round-trip bus from Aguas Calientes to Machu Picchu entrance",
+      "Official Machu Picchu entrance ticket",
+      "3-hour guided tour with certified archaeologist",
+      "Packed breakfast",
+      "Bottled water and snacks"
+    ],
+    exclusions: [
+      "Lunch (optional upgrade to Belmond Lodge buffet available)",
+      "Huayna Picchu mountain entry (limited slots, must book in advance)",
+      "Travel insurance",
+      "Personal items",
+      "Gratuities"
+    ],
+    schedule: [
+      { time: "5:30 AM", activity: "Hotel Pickup in Cusco", description: "Early morning pickup from your Cusco hotel. Transfer to Poroy train station with packed breakfast provided." },
+      { time: "6:45 AM", activity: "Vistadome Train Departure", description: "Board the spectacular Vistadome panoramic train. Watch the Sacred Valley unfold through floor-to-ceiling windows as you descend from the Andes into the cloud forest." },
+      { time: "9:30 AM", activity: "Arrive Aguas Calientes", description: "Arrive at the town of Aguas Calientes at the foot of Machu Picchu mountain. Board the shuttle bus for the 30-minute climb." },
+      { time: "10:00 AM", activity: "Machu Picchu Entrance", description: "Enter the citadel through the Sun Gate and take in your first views of the legendary lost city in all its cloud-wreathed glory." },
+      { time: "10:15 AM", activity: "Guided Archaeological Tour", description: "Your expert guide leads a 3-hour tour of the citadel's key areas — the Temple of the Sun, the Intihuatana stone, the agricultural terraces, and the residential quarters." },
+      { time: "1:15 PM", activity: "Free Exploration Time", description: "Explore the citadel at your own pace. Hike the optional Sun Gate trail (45 min each way) for sweeping views over the entire site." },
+      { time: "3:00 PM", activity: "Return to Aguas Calientes", description: "Descend by shuttle bus to Aguas Calientes for free time to browse the artisan markets and relax before the return train." },
+      { time: "5:00 PM", activity: "Return Train Departure", description: "Board the return Vistadome train through the Sacred Valley as the Andes dusk casts golden light across the mountains." },
+      { time: "8:00 PM", activity: "Hotel Drop-off in Cusco", description: "Return transfer to your Cusco accommodation after an extraordinary day." }
+    ],
+    reviews: [
+      { name: "Hannah J.", date: "January 2026", rating: 5, comment: "Life-changing. Our guide Ricardo brought every stone of Machu Picchu to life with stories and genuine passion. Impeccably organised from start to finish.", avatar: "H" },
+      { name: "Marco A.", date: "December 2025", rating: 5, comment: "Worth every penny. The Vistadome train alone is worth the trip. Seeing Machu Picchu emerge from the mist at sunrise — indescribable.", avatar: "M" },
+      { name: "Priya K.", date: "November 2025", rating: 5, comment: "Flawless logistics on an incredibly complex day. Didn't have to think about a single thing. Just showed up and experienced magic.", avatar: "P" },
+      { name: "Steven C.", date: "October 2025", rating: 4, comment: "Superb tour but be prepared for altitude — Cusco sits at 3,400m and you may feel some effects. Acclimatise for a day before booking.", avatar: "S" }
+    ],
+    categories: ["Heritage", "Adventure", "Nature"],
+    languages: ["English", "Spanish", "Portuguese"],
+    cancellationPolicy: "Free cancellation up to 72 hours before departure. No refunds after that due to train and entry ticket costs.",
+    tags: ["Machu Picchu", "Peru", "Inca", "Heritage", "Andes"],
+    featured: false
+  },
+  {
+    id: "7",
+    slug: "marrakech-medina-souks-tour",
+    title: "Marrakech Medina, Souks & Moroccan Cooking Tour",
+    shortDescription: "Plunge into the labyrinthine souks of Marrakech's UNESCO medina, visit the tanneries, and learn to cook a traditional Moroccan feast.",
+    description: "Marrakech's medina is one of the world's great sensory experiences — a labyrinth of souks, riads, and mosques that has changed little since the 12th century. This immersive day tour pairs a guided medina walk (so you don't get lost!) with a hands-on Moroccan cooking class led by a local chef. Navigate spice markets, visit the famous leather tanneries, marvel at the Saadian Tombs, and then cook and eat an extraordinary meal together.",
+    duration: "8 hours",
+    durationHours: 8,
+    maxGroupSize: 10,
+    difficulty: "Easy",
+    price: 85,
+    originalPrice: 110,
+    rating: 4.8,
+    reviewCount: 415,
+    location: "Marrakech, Morocco",
+    category: "Food & Culture",
+    meetingPoint: "Jemaa el-Fna Square, near the main Koutoubia Mosque entrance",
+    photos: [
+      "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=1200&q=80",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+      "https://images.unsplash.com/photo-1560258018-c7db7645254e?w=800&q=80",
+      "https://images.unsplash.com/photo-1572791983100-7b47ef9c7e5e?w=800&q=80",
+      "https://images.unsplash.com/photo-1519563912073-dcaedcd29a4b?w=800&q=80"
+    ],
+    highlights: [
+      "Navigate the UNESCO-listed medina with an expert local guide",
+      "Visit the famous Chouara leather tanneries",
+      "Explore the spice and herb souks with a guide who knows every trader",
+      "Hands-on Moroccan cooking class with a local chef in a traditional riad",
+      "Feast on the dishes you cook for lunch — tagine, couscous, and bastilla"
+    ],
+    inclusions: [
+      "Expert local medina guide",
+      "All entrance fees (Saadian Tombs, tannery viewpoint)",
+      "Moroccan cooking class with professional chef",
+      "All cooking ingredients",
+      "Lunch of the dishes prepared",
+      "Mint tea and soft drinks"
+    ],
+    exclusions: [
+      "Hotel transfers",
+      "Additional purchases in the souks",
+      "Alcoholic beverages",
+      "Gratuities"
+    ],
+    schedule: [
+      { time: "9:00 AM", activity: "Meet at Jemaa el-Fna", description: "Begin at the iconic Jemaa el-Fna square — the pulsing heart of Marrakech. Your guide introduces the medina's history and navigational secrets." },
+      { time: "9:30 AM", activity: "Spice Market (Rahba Kedima)", description: "Enter the ancient spice market. Your guide explains dozens of Moroccan herbs and spices — from ras el hanout to argan oil — and their culinary and medicinal uses." },
+      { time: "10:30 AM", activity: "Souk Quarter Exploration", description: "Wind through specialist souks — copper, lanterns, carpets, leather babouches — each quartier with its own craft guild unchanged for centuries." },
+      { time: "11:00 AM", activity: "Chouara Leather Tanneries", description: "View the famous medieval tanneries from rooftop terraces. Watch craftsmen treating and dyeing leather in enormous stone vats using centuries-old techniques." },
+      { time: "11:45 AM", activity: "Saadian Tombs", description: "Visit the spectacular 16th-century royal tombs, rediscovered in 1917 and renowned for their intricate cedar and marble craftsmanship." },
+      { time: "12:30 PM", activity: "Moroccan Cooking Class", description: "Transfer to a beautiful traditional riad for a 2-hour hands-on cooking class. Learn to prepare chicken tagine with preserved lemons, vegetable couscous, and flaky bastilla pie." },
+      { time: "2:30 PM", activity: "Feast Together", description: "Sit down and enjoy everything you've cooked — a proper Moroccan feast with mint tea, Moroccan bread, and a warm community atmosphere." },
+      { time: "4:00 PM", activity: "Tour End", description: "Tour concludes at the riad. Walking directions back to your hotel or to central landmarks provided." }
+    ],
+    reviews: [
+      { name: "Amelia C.", date: "February 2026", rating: 5, comment: "The cooking class alone was worth the entire price. Chef Fatima was patient, funny, and incredibly talented. Our tagine was perfect.", avatar: "A" },
+      { name: "Paul M.", date: "January 2026", rating: 5, comment: "Essential Marrakech experience. Without a guide the medina is genuinely overwhelming — with one it's pure magic. Our guide Hassan knew everyone.", avatar: "P" },
+      { name: "Nadia B.", date: "December 2025", rating: 5, comment: "We're vegetarians and they accommodated us beautifully without any fuss. The vegetable couscous was the best I've ever eaten.", avatar: "N" },
+      { name: "Tim L.", date: "November 2025", rating: 4, comment: "Brilliant day. Tanneries were a highlight — nothing prepares you for that sight. The souks can be intense but your guide handles any hassle very diplomatically.", avatar: "T" }
+    ],
+    categories: ["Food & Culture", "History", "Sightseeing"],
+    languages: ["English", "French", "Arabic"],
+    cancellationPolicy: "Free cancellation up to 24 hours before start time.",
+    tags: ["Marrakech", "Morocco", "Souks", "Cooking", "Medina"],
+    featured: false
+  },
+  {
+    id: "8",
+    slug: "new-york-highlights-walking-tour",
+    title: "New York City Iconic Highlights Day Tour",
+    shortDescription: "From Central Park to the Brooklyn Bridge — hit all of NYC's must-see spots with a witty, passionate local guide who knows every story behind the skyline.",
+    description: "New York City is arguably the most storied city in the world, and this carefully crafted day tour makes sure you see and understand its greatest landmarks — not just walk past them. From the arboreal calm of Central Park to the raw energy of Times Square, through the historic streets of Greenwich Village, across the Brooklyn Bridge with sweeping Manhattan views, and into the dynamic neighbourhoods of Brooklyn — this is New York at its exhilarating best.",
+    duration: "9 hours",
+    durationHours: 9,
+    maxGroupSize: 15,
+    difficulty: "Easy",
+    price: 89,
+    originalPrice: 115,
+    rating: 4.7,
+    reviewCount: 892,
+    location: "New York City, USA",
+    category: "Sightseeing",
+    meetingPoint: "Central Park South — Grand Army Plaza (in front of The Plaza Hotel)",
+    photos: [
+      "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=80",
+      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=800&q=80",
+      "https://images.unsplash.com/photo-1541336032412-2048a678540d?w=800&q=80",
+      "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&q=80",
+      "https://images.unsplash.com/photo-1560175803-2a5d40f7e0e1?w=800&q=80"
+    ],
+    highlights: [
+      "Morning walk through Central Park with stories from its 160-year history",
+      "Times Square and the Midtown skyscraper canyon",
+      "Greenwich Village — literary history, brownstones, and coffee culture",
+      "Walk across the iconic Brooklyn Bridge with panoramic Manhattan views",
+      "DUMBO neighbourhood lunch and waterfront views of Lower Manhattan"
+    ],
+    inclusions: [
+      "Expert licensed New York City guide",
+      "Central Park guided walk",
+      "Unlimited subway and metro card for the day",
+      "Entry to the 9/11 Memorial (exterior)",
+      "Brooklyn Bridge walk",
+      "DUMBO lunch recommendations and reservations"
+    ],
+    exclusions: [
+      "Lunch (recommendations included with reservations made by guide)",
+      "Museum entry fees",
+      "Personal purchases",
+      "Gratuities"
+    ],
+    schedule: [
+      { time: "9:00 AM", activity: "Central Park Welcome", description: "Begin at Grand Army Plaza and walk through Central Park's southern end — the Pond, Wollman Rink (winter), Strawberry Fields, and Bethesda Terrace." },
+      { time: "10:30 AM", activity: "Upper West Side to Midtown", description: "Walk or take the subway down through the Upper West Side. Pause at Columbus Circle and enter the spectacular energy of Midtown Manhattan." },
+      { time: "11:00 AM", activity: "Times Square & 5th Avenue", description: "Navigate Times Square's sensory overload with your guide's cultural context. Walk the famous stretch of 5th Avenue past Rockefeller Center and St. Patrick's Cathedral." },
+      { time: "12:00 PM", activity: "Greenwich Village", description: "Explore the tree-lined streets of the West Village — home to Washington Square Park, former Beat Generation haunts, and NYC's best cafes." },
+      { time: "1:00 PM", activity: "Lunch Break (Independent)", description: "Free time for lunch in Greenwich Village. Your guide provides curated recommendations for every budget, with reservations pre-made." },
+      { time: "2:30 PM", activity: "Lower Manhattan & 9/11 Memorial", description: "Walk through the Financial District's canyon of finance, past the Charging Bull and Fearless Girl, and pause at the solemn 9/11 Memorial reflecting pools." },
+      { time: "3:30 PM", activity: "Brooklyn Bridge Walk", description: "Walk the full span of the iconic 1883 suspension bridge. Pause at the midpoint for the quintessential Manhattan skyline photograph." },
+      { time: "4:30 PM", activity: "DUMBO, Brooklyn", description: "Explore the photogenic streets of DUMBO (Down Under the Manhattan Bridge Overpass) — home to art galleries, Jane's Carousel, and the famous Manhattan Bridge framed view." },
+      { time: "6:00 PM", activity: "Tour End in Brooklyn", description: "Tour concludes in DUMBO with easy subway access back to Midtown or downtown Manhattan." }
+    ],
+    reviews: [
+      { name: "Charlotte B.", date: "February 2026", rating: 5, comment: "Our guide Danny was absolutely fantastic — funny, sharp, and endlessly knowledgeable. He made the city feel alive. Best city tour we've ever done, anywhere.", avatar: "C" },
+      { name: "Raj P.", date: "January 2026", rating: 5, comment: "Did this with my teenage kids and they actually loved it — which says everything. The Brooklyn Bridge walk was the highlight for all of us.", avatar: "R" },
+      { name: "Anna T.", date: "December 2025", rating: 4, comment: "Excellent, comprehensive day. We covered so much ground. Only wish we'd had more time in the Village — could have spent hours there.", avatar: "A" },
+      { name: "Mark D.", date: "November 2025", rating: 5, comment: "I've been to NYC four times but saw it completely differently with a knowledgeable local guide. The historical stories and context transformed every landmark.", avatar: "M" }
+    ],
+    categories: ["Sightseeing", "History", "Walking"],
+    languages: ["English", "Spanish", "Mandarin"],
+    cancellationPolicy: "Free cancellation up to 24 hours before start time.",
+    tags: ["New York", "USA", "Walking", "Landmarks", "Brooklyn Bridge"],
+    featured: false
+  }
+];
+
+// Utility helpers used by both pages
+function getStarHTML(rating) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+  return (
+    '<span class="stars" aria-label="' + rating + ' out of 5 stars">' +
+    '★'.repeat(full) +
+    (half ? '½' : '') +
+    '☆'.repeat(empty) +
+    '</span>'
+  );
+}
+
+function formatPrice(price) {
+  return '$' + price.toLocaleString();
+}
+
+function getDifficultyClass(difficulty) {
+  return {
+    'Easy': 'difficulty-easy',
+    'Moderate': 'difficulty-moderate',
+    'Challenging': 'difficulty-hard'
+  }[difficulty] || 'difficulty-easy';
+}
+
+function getTourBySlug(slug) {
+  return TOURS_DATA.find(t => t.slug === slug) || null;
+}
+
+function getTourById(id) {
+  return TOURS_DATA.find(t => t.id === id) || null;
+}
+
+/* ====================================================
+   tour.js — Tour Product Detail Page Logic
+   ==================================================== */
+
+(function () {
+  'use strict';
+
+  // ---- State ----
+  let tour = null;
+  let lightboxIndex = 0;
+  const wishlist = JSON.parse(localStorage.getItem('wd_wishlist') || '[]');
+
+  // ---- DOM refs ----
+  const loadingEl    = document.getElementById('loading-state');
+  const contentEl    = document.getElementById('tour-content');
+  const notFoundEl   = document.getElementById('not-found-state');
+  const toastEl      = document.getElementById('toast');
+
+  // ---- Init ----
+  function init() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug') || '';
+
+    tour = getTourBySlug(slug);
+
+    if (!tour) {
+      loadingEl.style.display = 'none';
+      notFoundEl.style.display = 'block';
+      return;
+    }
+
+    populatePage();
+    bindEvents();
+
+    loadingEl.style.display = 'none';
+    contentEl.style.display = 'block';
+  }
+
+  // ---- Page Population ----
+  function populatePage() {
+    // Meta
+    document.getElementById('page-title').textContent = `${tour.title} | WanderDay`;
+    document.getElementById('page-desc').setAttribute('content', tour.shortDescription);
+
+    // Breadcrumb
+    document.getElementById('bc-location').textContent = tour.location;
+    document.getElementById('bc-title').textContent = truncate(tour.title, 50);
+
+    // Gallery
+    buildGallery();
+
+    // Header
+    buildTourHeader();
+
+    // Highlights
+    buildHighlights();
+
+    // Tabs content
+    buildOverview();
+    buildItinerary();
+    buildInclusions();
+    buildReviews();
+
+    // Booking widget
+    buildBookingWidget();
+
+    // Related tours
+    buildRelatedTours();
+
+    // Header search redirect
+    const headerSearch = document.getElementById('header-search');
+    if (headerSearch) {
+      headerSearch.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+          window.location.href = `preview-search.html?q=${encodeURIComponent(this.value.trim())}`;
+        }
+      });
+    }
+  }
+
+  // ---- Gallery ----
+  function buildGallery() {
+    const galleryEl = document.getElementById('photo-gallery');
+    const photos = tour.photos;
+
+    if (!photos || photos.length === 0) return;
+
+    const mainImg = photos[0];
+    const thumbs  = photos.slice(1, 5);
+    const total   = photos.length;
+
+    const thumbsHTML = thumbs.map((src, i) => {
+      const isLast = i === thumbs.length - 1 && total > 5;
+      return `
+        <div class="gallery-thumb" data-index="${i + 1}" role="button" tabindex="0" aria-label="View photo ${i + 2}">
+          <img src="${src}" alt="${escapeHTML(tour.title)} — photo ${i + 2}" loading="lazy" />
+          ${isLast ? `<button class="gallery-more-btn" id="gallery-more-btn" aria-label="View all ${total} photos">+${total - 4} photos</button>` : ''}
+        </div>`;
+    }).join('');
+
+    galleryEl.innerHTML = `
+      <div class="gallery-main" data-index="0" role="button" tabindex="0" aria-label="View main photo">
+        <img src="${mainImg}" alt="${escapeHTML(tour.title)}" />
+      </div>
+      ${thumbsHTML}
+    `;
+  }
+
+  // ---- Tour Header ----
+  function buildTourHeader() {
+    // Category badge
+    const catBadge = document.getElementById('tour-category-badge');
+    catBadge.textContent = tour.category;
+    catBadge.className = 'badge badge-outline';
+
+    // Location
+    document.getElementById('tour-location-badge').innerHTML =
+      `📍 <strong>${escapeHTML(tour.location)}</strong>`;
+
+    // Title
+    document.getElementById('tour-title').textContent = tour.title;
+
+    // Quick stats
+    const statsEl = document.getElementById('tour-quick-stats');
+    statsEl.innerHTML = `
+      <div class="quick-stat">
+        <span class="quick-stat-icon">⏱</span>
+        <span><strong>${escapeHTML(tour.duration)}</strong></span>
+      </div>
+      <div class="quick-stat">
+        <span class="quick-stat-icon">👥</span>
+        <span>Max <strong>${tour.maxGroupSize} guests</strong></span>
+      </div>
+      <div class="quick-stat">
+        <span class="quick-stat-icon">🗣</span>
+        <span>Guided in <strong>${tour.languages.join(', ')}</strong></span>
+      </div>
+      <div class="quick-stat">
+        <span class="quick-stat-icon">🏃</span>
+        <span class="badge ${getDifficultyClass(tour.difficulty)}">${escapeHTML(tour.difficulty)}</span>
+      </div>
+    `;
+
+    // Rating row
+    const ratingRow = document.getElementById('tour-rating-row');
+    ratingRow.innerHTML = `
+      ${getStarHTML(tour.rating)}
+      <span class="rating-value">${tour.rating.toFixed(1)}</span>
+      <span class="rating-count">${tour.reviewCount.toLocaleString()} reviews</span>
+    `;
+  }
+
+  // ---- Highlights ----
+  function buildHighlights() {
+    const listEl = document.getElementById('highlights-list');
+    listEl.innerHTML = tour.highlights.map(h =>
+      `<li>${escapeHTML(h)}</li>`
+    ).join('');
+  }
+
+  // ---- Overview Tab ----
+  function buildOverview() {
+    document.getElementById('tour-description').textContent = tour.description;
+    document.getElementById('meeting-point-text').textContent = tour.meetingPoint;
+  }
+
+  // ---- Itinerary Tab ----
+  function buildItinerary() {
+    const listEl = document.getElementById('itinerary-list');
+    listEl.innerHTML = tour.schedule.map((item, i) => `
+      <div class="itinerary-item">
+        <div class="itinerary-time">${escapeHTML(item.time)}</div>
+        <div class="itinerary-dot" aria-hidden="true"></div>
+        ${i < tour.schedule.length - 1 ? '<div class="itinerary-line" aria-hidden="true"></div>' : ''}
+        <div class="itinerary-content">
+          <div class="itinerary-activity">${escapeHTML(item.activity)}</div>
+          <div class="itinerary-desc">${escapeHTML(item.description)}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ---- Inclusions Tab ----
+  function buildInclusions() {
+    const inclEl = document.getElementById('inclusions-list');
+    const exclEl = document.getElementById('exclusions-list');
+    const cancEl = document.getElementById('cancellation-text');
+
+    inclEl.innerHTML = tour.inclusions.map(item =>
+      `<li><span class="inc-icon inc-yes" aria-hidden="true">✓</span>${escapeHTML(item)}</li>`
+    ).join('');
+
+    exclEl.innerHTML = tour.exclusions.map(item =>
+      `<li><span class="inc-icon inc-no" aria-hidden="true">✕</span>${escapeHTML(item)}</li>`
+    ).join('');
+
+    cancEl.textContent = tour.cancellationPolicy;
+  }
+
+  // ---- Reviews Tab ----
+  function buildReviews() {
+    const summaryEl = document.getElementById('reviews-summary');
+    const cardsEl   = document.getElementById('review-cards');
+
+    // Rating breakdown (simulated percentages)
+    const breakdowns = [
+      { stars: '5 ★', pct: 78 },
+      { stars: '4 ★', pct: 16 },
+      { stars: '3 ★', pct: 4 },
+      { stars: '2 ★', pct: 1 },
+      { stars: '1 ★', pct: 1 },
+    ];
+
+    summaryEl.innerHTML = `
+      <div class="reviews-big-score">
+        <div class="reviews-big-number">${tour.rating.toFixed(1)}</div>
+        <div class="reviews-big-stars">${getStarHTML(tour.rating)}</div>
+        <div class="reviews-big-count">${tour.reviewCount.toLocaleString()} reviews</div>
+      </div>
+      <div class="reviews-breakdown">
+        ${breakdowns.map(b => `
+          <div class="rating-bar-row">
+            <span class="rating-bar-label">${b.stars}</span>
+            <div class="rating-bar-track">
+              <div class="rating-bar-fill" style="width:${b.pct}%;" role="meter" aria-valuenow="${b.pct}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="rating-bar-pct">${b.pct}%</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    cardsEl.innerHTML = tour.reviews.map(review => `
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" aria-hidden="true">${escapeHTML(review.avatar)}</div>
+          <div>
+            <div class="review-author">${escapeHTML(review.name)}</div>
+            <div class="review-date">${escapeHTML(review.date)}</div>
+          </div>
+          <div class="review-stars" aria-label="${review.rating} out of 5 stars">
+            ${getStarHTML(review.rating)}
+          </div>
+        </div>
+        <p class="review-text">${escapeHTML(review.comment)}</p>
+      </div>
+    `).join('');
+  }
+
+  // ---- Booking Widget ----
+  function buildBookingWidget() {
+    const priceRow = document.getElementById('booking-price-row');
+    const ratingRow = document.getElementById('booking-rating-row');
+    const totalEl = document.getElementById('booking-total');
+    const guestsEl = document.getElementById('book-guests');
+    const dateEl   = document.getElementById('book-date');
+    const langEl   = document.getElementById('booking-languages');
+    const cancInfoEl = document.getElementById('cancellation-info-text');
+
+    const discount = tour.originalPrice
+      ? Math.round(((tour.originalPrice - tour.price) / tour.originalPrice) * 100)
+      : 0;
+
+    priceRow.innerHTML = `
+      <span class="booking-price">$${tour.price}</span>
+      <span class="booking-price-per">/ person</span>
+      ${tour.originalPrice ? `<span class="booking-original-price">$${tour.originalPrice}</span>` : ''}
+      ${discount > 0 ? `<span class="booking-saving">Save ${discount}%</span>` : ''}
+    `;
+
+    ratingRow.innerHTML = `
+      ${getStarHTML(tour.rating)}
+      <span class="rating-value">${tour.rating.toFixed(1)}</span>
+      <span class="rating-count">(${tour.reviewCount.toLocaleString()} reviews)</span>
+    `;
+
+    langEl.textContent = `Guided in ${tour.languages.join(', ')}`;
+    cancInfoEl.textContent = tour.cancellationPolicy;
+
+    // Set min date to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateEl.min = tomorrow.toISOString().split('T')[0];
+
+    function updateTotal() {
+      const guests = parseInt(guestsEl.value, 10) || 1;
+      const total = guests * tour.price;
+      totalEl.textContent = `$${total.toLocaleString()}`;
+    }
+
+    guestsEl.addEventListener('change', updateTotal);
+    updateTotal();
+
+    // Dynamically update max guests
+    const maxGroup = tour.maxGroupSize;
+    Array.from(guestsEl.options).forEach(opt => {
+      if (parseInt(opt.value, 10) > maxGroup) opt.disabled = true;
+    });
+  }
+
+  // ---- Related Tours ----
+  function buildRelatedTours() {
+    const gridEl = document.getElementById('related-grid');
+    const related = TOURS_DATA
+      .filter(t => t.id !== tour.id)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+
+    gridEl.innerHTML = related.map(t => `
+      <a class="related-card" href="preview-tour.html?slug=${t.slug}" aria-label="${escapeHTML(t.title)}">
+        <div class="related-card-img">
+          <img src="${t.photos[0]}" alt="${escapeHTML(t.title)}" loading="lazy" />
+        </div>
+        <div class="related-card-body">
+          <div class="related-card-location">📍 ${escapeHTML(t.location)}</div>
+          <div class="related-card-title">${escapeHTML(t.title)}</div>
+          <div class="related-card-footer">
+            <div class="related-card-rating">
+              ${getStarHTML(t.rating)}
+              <span>${t.rating.toFixed(1)}</span>
+            </div>
+            <div class="related-card-price">$${t.price}</div>
+          </div>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  // ---- Lightbox ----
+  function openLightbox(index) {
+    const photos = tour.photos;
+    lightboxIndex = index;
+
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const thumbsEl = document.getElementById('lightbox-thumbs');
+
+    img.src = photos[lightboxIndex];
+    img.alt = `${tour.title} — photo ${lightboxIndex + 1}`;
+
+    thumbsEl.innerHTML = photos.map((src, i) => `
+      <img
+        src="${src}"
+        alt="Photo ${i + 1}"
+        class="${i === lightboxIndex ? 'active' : ''}"
+        data-index="${i}"
+        role="listitem"
+        tabindex="0"
+      />
+    `).join('');
+
+    thumbsEl.querySelectorAll('img').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        lightboxIndex = parseInt(thumb.dataset.index, 10);
+        updateLightbox();
+      });
+    });
+
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    const photos = tour.photos;
+    const img = document.getElementById('lightbox-img');
+    const thumbsEl = document.getElementById('lightbox-thumbs');
+
+    lightboxIndex = (lightboxIndex + photos.length) % photos.length;
+    img.src = photos[lightboxIndex];
+    img.alt = `${tour.title} — photo ${lightboxIndex + 1}`;
+
+    thumbsEl.querySelectorAll('img').forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === lightboxIndex);
+    });
+  }
+
+  // ---- Tabs ----
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      const isActive = btn.dataset.tab === tabName;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.classList.toggle('active', panel.id === `tab-${tabName}`);
+    });
+  }
+
+  // ---- Booking Form ----
+  function handleBooking(e) {
+    e.preventDefault();
+    const dateEl   = document.getElementById('book-date');
+    const guestsEl = document.getElementById('book-guests');
+
+    if (!dateEl.value) {
+      showToast('Please select a date', 'error');
+      dateEl.focus();
+      return;
+    }
+
+    const guests  = parseInt(guestsEl.value, 10);
+    const total   = guests * tour.price;
+    const dateStr = new Date(dateEl.value).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    showToast(`🎉 Booking request sent for ${guests} guest${guests > 1 ? 's' : ''} on ${dateStr} — Total: $${total}`, 'success');
+  }
+
+  // ---- Toast ----
+  function showToast(msg, type = '') {
+    toastEl.textContent = msg;
+    toastEl.className = 'toast' + (type ? ' ' + type : '');
+    toastEl.classList.add('show');
+    clearTimeout(toastEl._timer);
+    toastEl._timer = setTimeout(() => toastEl.classList.remove('show'), 3500);
+  }
+
+  // ---- Helpers ----
+  function escapeHTML(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function truncate(str, max) {
+    return str.length > max ? str.slice(0, max) + '…' : str;
+  }
+
+  // ---- Event Bindings ----
+  function bindEvents() {
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+      btn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); switchTab(btn.dataset.tab); }
+      });
+    });
+
+    // Gallery click → lightbox
+    const galleryEl = document.getElementById('photo-gallery');
+    if (galleryEl) {
+      galleryEl.addEventListener('click', function (e) {
+        const target = e.target.closest('[data-index]');
+        if (target && !e.target.closest('#gallery-more-btn')) {
+          openLightbox(parseInt(target.dataset.index, 10));
+        }
+        if (e.target.closest('#gallery-more-btn')) {
+          openLightbox(0);
+        }
+      });
+
+      galleryEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const target = e.target.closest('[data-index]');
+          if (target) { e.preventDefault(); openLightbox(parseInt(target.dataset.index, 10)); }
+        }
+      });
+    }
+
+    // Lightbox controls
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => { lightboxIndex--; updateLightbox(); });
+    document.getElementById('lightbox-next').addEventListener('click', () => { lightboxIndex++; updateLightbox(); });
+
+    document.getElementById('lightbox').addEventListener('click', function (e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // Keyboard for lightbox
+    document.addEventListener('keydown', function (e) {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft')  { lightboxIndex--; updateLightbox(); }
+      if (e.key === 'ArrowRight') { lightboxIndex++; updateLightbox(); }
+    });
+
+    // Booking form
+    const bookingForm = document.getElementById('booking-form');
+    if (bookingForm) bookingForm.addEventListener('submit', handleBooking);
+  }
+
+  // ---- Bootstrap ----
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+  </script>
+</body>
+</html>
