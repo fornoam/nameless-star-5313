@@ -1653,6 +1653,14 @@ input, select { font-family: inherit; }
       </nav>
     </div>
   </header>
+  <!-- Preview tour picker — hidden on real site, injected only in preview-tour.html -->
+  <div id="preview-picker-bar" style="background:#1e2a3a;color:#fff;padding:10px 0;font-size:13px;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <span style="opacity:.7;white-space:nowrap;">📋 Preview mode — viewing tour:</span>
+      <select id="preview-tour-select" style="flex:1;min-width:200px;max-width:420px;padding:6px 10px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer;background:#fff;color:#1e2a3a;"></select>
+      <a href="preview-search.html" style="color:#FF6B35;text-decoration:none;font-weight:600;white-space:nowrap;">← Browse all tours</a>
+    </div>
+  </div>
   <main id="tour-main">
     <div id="loading-state" style="text-align:center; padding: 80px 20px; color: #636e72;">
       <div style="font-size: 36px; margin-bottom: 16px;">⏳</div>
@@ -2390,11 +2398,9 @@ function getTourById(id) {
   const toastEl      = document.getElementById('toast');
 
   // ---- Init ----
-  function init() {
-    // htmlpreview.github.io strips query strings, so read slug from hash first
-    const hash = window.location.hash.slice(1);
-    const params = new URLSearchParams(window.location.search);
-    const slug = hash || params.get('slug') || (TOURS_DATA[0] && TOURS_DATA[0].slug) || '';
+  function init(slug) {
+    // Accept explicit slug, fall back to first tour — no URL parsing needed
+    if (!slug) slug = (TOURS_DATA[0] && TOURS_DATA[0].slug) || '';
 
     tour = getTourBySlug(slug);
 
@@ -2404,11 +2410,35 @@ function getTourById(id) {
       return;
     }
 
-    populatePage();
-    bindEvents();
+    try {
+      populatePage();
+      bindEvents();
+    } catch (e) {
+      loadingEl.innerHTML = '<div style="font-size:36px;margin-bottom:16px;">⚠️</div><p style="color:#e74c3c;font-weight:600;">Preview error: ' + e.message + '</p><pre style="font-size:11px;text-align:left;max-width:600px;margin:12px auto;overflow:auto;">' + (e.stack || '') + '</pre>';
+      return;
+    }
 
     loadingEl.style.display = 'none';
     contentEl.style.display = 'block';
+
+    // Keep dropdown in sync
+    const sel = document.getElementById('preview-tour-select');
+    if (sel) sel.value = slug;
+  }
+
+  function populatePickerDropdown() {
+    const sel = document.getElementById('preview-tour-select');
+    if (!sel) return;
+    sel.innerHTML = TOURS_DATA.map(t =>
+      `<option value="${t.slug}">${t.title} — ${t.location}</option>`
+    ).join('');
+    sel.addEventListener('change', function () {
+      contentEl.style.display = 'none';
+      notFoundEl.style.display = 'none';
+      loadingEl.style.display = 'block';
+      window.scrollTo(0, 0);
+      init(this.value);
+    });
   }
 
   // ---- Page Population ----
@@ -2682,7 +2712,7 @@ function getTourById(id) {
       .slice(0, 3);
 
     gridEl.innerHTML = related.map(t => `
-      <a class="related-card" href="preview-tour.html#${t.slug}" aria-label="${escapeHTML(t.title)}">
+      <a class="related-card" href="#" onclick="event.preventDefault();document.getElementById('tour-content').style.display='none';document.getElementById('loading-state').style.display='block';window.__initTour('${t.slug}');window.scrollTo(0,0);" aria-label="${escapeHTML(t.title)}">
         <div class="related-card-img">
           <img src="${t.photos[0]}" alt="${escapeHTML(t.title)}" loading="lazy" />
         </div>
@@ -2864,21 +2894,20 @@ function getTourById(id) {
     if (bookingForm) bookingForm.addEventListener('submit', handleBooking);
   }
 
+  // Expose init globally so related-card onclick and dropdown can call it
+  window.__initTour = init;
+
   // ---- Bootstrap ----
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
+  function boot() {
+    populatePickerDropdown();
     init();
   }
 
-  // Re-render when a related-tour hash link is clicked on the same page
-  window.addEventListener('hashchange', function () {
-    contentEl.style.display = 'none';
-    notFoundEl.style.display = 'none';
-    loadingEl.style.display = 'block';
-    init();
-    window.scrollTo(0, 0);
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 
 })();
   </script>
