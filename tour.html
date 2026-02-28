@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Tour Details | WanderDay</title>
+  <meta name="description" id="page-desc" content="Day tour details, itinerary, inclusions, and booking." />
+  <link rel="stylesheet" href="css/tours.css" />
+</head>
+<body>
+
+  <!-- ======================== HEADER ======================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="tours.html" class="header-logo" aria-label="WanderDay home">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="14" cy="14" r="13" fill="#FF6B35" opacity="0.15"/>
+          <path d="M14 4C9.58 4 6 7.58 6 12c0 6 8 16 8 16s8-10 8-16c0-4.42-3.58-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z" fill="#FF6B35"/>
+        </svg>
+        Wander<span>Day</span>
+      </a>
+
+      <div class="header-search" role="search">
+        <span class="header-search-icon" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input
+          type="search"
+          placeholder="Search destinations or tours…"
+          aria-label="Search tours"
+          id="header-search"
+        />
+      </div>
+
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="tours.html">All Tours</a>
+        <a href="#">Destinations</a>
+        <a href="#" class="btn btn-primary btn-sm">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================== MAIN ======================== -->
+  <main id="tour-main">
+
+    <!-- Loading state (shown until JS populates content) -->
+    <div id="loading-state" style="text-align:center; padding: 80px 20px; color: #636e72;">
+      <div style="font-size: 36px; margin-bottom: 16px;">⏳</div>
+      <p>Loading tour details…</p>
+    </div>
+
+    <!-- Tour content (hidden until populated) -->
+    <div id="tour-content" style="display:none;">
+
+      <!-- Breadcrumb -->
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="tours.html">Tours</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span id="bc-location" class="breadcrumb-link"></span>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span id="bc-title" class="breadcrumb-current" aria-current="page"></span>
+        </nav>
+      </div>
+
+      <!-- Photo Gallery -->
+      <div class="container">
+        <div class="photo-gallery" id="photo-gallery" role="region" aria-label="Tour photo gallery">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Tour Detail Layout -->
+      <div class="container">
+        <div class="tour-detail-layout">
+
+          <!-- ====== MAIN CONTENT ====== -->
+          <div class="tour-detail-main">
+
+            <!-- Tour Header -->
+            <div class="tour-header">
+              <div class="tour-header-meta">
+                <span class="badge" id="tour-category-badge"></span>
+                <span id="tour-location-badge" style="font-size:13px; color:#636e72; display:flex; align-items:center; gap:3px;"></span>
+              </div>
+
+              <h1 class="tour-title" id="tour-title"></h1>
+
+              <div class="tour-quick-stats" id="tour-quick-stats">
+                <!-- Populated by JS -->
+              </div>
+
+              <div class="rating-row" id="tour-rating-row">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Highlights Strip -->
+            <div class="highlights-strip" id="highlights-strip">
+              <h3>Tour Highlights</h3>
+              <ul id="highlights-list"></ul>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs" role="tablist" aria-label="Tour information tabs">
+              <button class="tab-btn active" role="tab" aria-selected="true"  aria-controls="tab-overview"   id="tab-btn-overview"   data-tab="overview">Overview</button>
+              <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-itinerary" id="tab-btn-itinerary" data-tab="itinerary">Itinerary</button>
+              <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-inclusions" id="tab-btn-inclusions" data-tab="inclusions">Inclusions</button>
+              <button class="tab-btn"        role="tab" aria-selected="false" aria-controls="tab-reviews"   id="tab-btn-reviews"   data-tab="reviews">Reviews</button>
+            </div>
+
+            <!-- Tab: Overview -->
+            <div class="tab-panel active" id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+              <p class="tour-description" id="tour-description"></p>
+
+              <!-- Meeting Point -->
+              <div class="meeting-point-section">
+                <h3>📍 Meeting Point</h3>
+                <div class="meeting-address">
+                  <span class="meeting-icon" aria-hidden="true">🗺</span>
+                  <div>
+                    <div id="meeting-point-text" style="font-weight:500; color:#2d3436; margin-bottom:4px;"></div>
+                    <div style="font-size:13px; color:#636e72;">Your guide will hold a WanderDay sign at the meeting point. Arrive 10 minutes early.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Itinerary -->
+            <div class="tab-panel" id="tab-itinerary" role="tabpanel" aria-labelledby="tab-btn-itinerary">
+              <div class="itinerary" id="itinerary-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Tab: Inclusions -->
+            <div class="tab-panel" id="tab-inclusions" role="tabpanel" aria-labelledby="tab-btn-inclusions">
+              <div class="inclusions-grid">
+                <div class="inclusions-section">
+                  <h3>✅ What's Included</h3>
+                  <ul class="inclusions-list" id="inclusions-list"></ul>
+                </div>
+                <div class="inclusions-section">
+                  <h3>❌ What's Not Included</h3>
+                  <ul class="inclusions-list" id="exclusions-list"></ul>
+                </div>
+              </div>
+
+              <div class="meeting-point-section" style="margin-top: 24px;">
+                <h3>📋 Cancellation Policy</h3>
+                <p id="cancellation-text" style="font-size:14px; color:#636e72; line-height:1.65; margin-top:8px;"></p>
+              </div>
+            </div>
+
+            <!-- Tab: Reviews -->
+            <div class="tab-panel" id="tab-reviews" role="tabpanel" aria-labelledby="tab-btn-reviews">
+              <div class="reviews-summary" id="reviews-summary">
+                <!-- Populated by JS -->
+              </div>
+              <div class="review-cards" id="review-cards">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+          </div><!-- /tour-detail-main -->
+
+          <!-- ====== BOOKING WIDGET ====== -->
+          <aside aria-label="Booking widget">
+            <div class="booking-widget" id="booking-widget">
+
+              <div class="booking-price-row" id="booking-price-row">
+                <!-- Populated by JS -->
+              </div>
+
+              <div class="booking-rating-row" id="booking-rating-row">
+                <!-- Populated by JS -->
+              </div>
+
+              <form class="booking-form" id="booking-form" novalidate>
+                <div class="booking-field">
+                  <label for="book-date">Select Date</label>
+                  <input
+                    type="date"
+                    id="book-date"
+                    required
+                    aria-required="true"
+                    aria-describedby="book-date-hint"
+                  />
+                  <span id="book-date-hint" class="sr-only">Choose your preferred tour date</span>
+                </div>
+
+                <div class="booking-field">
+                  <label for="book-guests">Number of Guests</label>
+                  <select id="book-guests" required aria-required="true">
+                    <option value="1">1 guest</option>
+                    <option value="2" selected>2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                    <option value="5">5 guests</option>
+                    <option value="6">6 guests</option>
+                    <option value="8">8 guests</option>
+                    <option value="10">10 guests</option>
+                  </select>
+                </div>
+
+                <div class="booking-total-row">
+                  <span class="booking-total-label">Total</span>
+                  <span class="booking-total-value" id="booking-total">$0</span>
+                </div>
+
+                <button type="submit" class="booking-book-btn" id="book-btn">
+                  Book Now — Check Availability
+                </button>
+              </form>
+
+              <div class="booking-meta">
+                <div class="booking-meta-item">
+                  <span class="booking-meta-item-icon" aria-hidden="true">✅</span>
+                  Free cancellation (see policy)
+                </div>
+                <div class="booking-meta-item">
+                  <span class="booking-meta-item-icon" aria-hidden="true">💳</span>
+                  Reserve now, pay later
+                </div>
+                <div class="booking-meta-item">
+                  <span class="booking-meta-item-icon" aria-hidden="true">🔒</span>
+                  Secure checkout — 256-bit SSL
+                </div>
+                <div class="booking-meta-item">
+                  <span class="booking-meta-item-icon" aria-hidden="true">🗣</span>
+                  <span id="booking-languages"></span>
+                </div>
+              </div>
+
+              <div class="cancellation-info" id="booking-cancellation-info">
+                <span class="cancellation-icon" aria-hidden="true">🌿</span>
+                <span id="cancellation-info-text"></span>
+              </div>
+
+            </div>
+          </aside>
+
+        </div><!-- /tour-detail-layout -->
+      </div>
+
+      <!-- ====== RELATED TOURS ====== -->
+      <section class="related-section" aria-label="You might also like">
+        <div class="container">
+          <h2>You Might Also Like</h2>
+          <div class="related-grid" id="related-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /#tour-content -->
+
+    <!-- 404 State -->
+    <div id="not-found-state" style="display:none; text-align:center; padding: 80px 20px; color: #636e72;">
+      <div style="font-size: 48px; margin-bottom: 16px;">🗺</div>
+      <h2 style="font-size:22px; font-weight:800; color:#2d3436; margin-bottom:8px;">Tour Not Found</h2>
+      <p style="margin-bottom:24px;">The tour you're looking for doesn't exist or has been removed.</p>
+      <a href="tours.html" class="btn btn-primary">Browse All Tours</a>
+    </div>
+
+  </main>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-logo">WanderDay</div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </div>
+      <div>&copy; 2026 WanderDay. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- ======================== LIGHTBOX ======================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close gallery">✕</button>
+    <div class="lightbox-img-wrap" style="position:relative;">
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous photo">‹</button>
+      <img src="" alt="" id="lightbox-img" />
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next photo">›</button>
+    </div>
+    <div class="lightbox-thumbs" id="lightbox-thumbs" role="list" aria-label="Photo thumbnails"></div>
+  </div>
+
+  <!-- ======================== TOAST ======================== -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ======================== SCRIPTS ======================== -->
+  <script src="js/tours-data.js"></script>
+  <script src="js/tour.js"></script>
+</body>
+</html>

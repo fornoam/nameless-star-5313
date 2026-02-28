@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day Tours — Search Results | WanderDay</title>
+  <meta name="description" content="Search and browse the best day tours worldwide. Filter by destination, price, duration and category." />
+  <link rel="stylesheet" href="css/tours.css" />
+</head>
+<body>
+
+  <!-- ======================== HEADER ======================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="tours.html" class="header-logo" aria-label="WanderDay home">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="14" cy="14" r="13" fill="#FF6B35" opacity="0.15"/>
+          <path d="M14 4C9.58 4 6 7.58 6 12c0 6 8 16 8 16s8-10 8-16c0-4.42-3.58-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z" fill="#FF6B35"/>
+        </svg>
+        Wander<span>Day</span>
+      </a>
+
+      <div class="header-search" role="search">
+        <span class="header-search-icon" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input
+          type="search"
+          id="header-search-input"
+          placeholder="Search destinations or tours…"
+          aria-label="Search destinations or tours"
+        />
+      </div>
+
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#">Destinations</a>
+        <a href="#">Categories</a>
+        <a href="#">Deals</a>
+        <a href="#" class="btn btn-primary btn-sm">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================== SEARCH HERO ======================== -->
+  <section class="search-hero" aria-label="Tour search">
+    <div class="container">
+      <h1>Discover Day Tours Worldwide</h1>
+      <p>Hand-picked experiences led by local experts. Book with confidence.</p>
+
+      <form class="search-form" id="search-form" role="search" aria-label="Advanced tour search">
+        <div class="search-field">
+          <label for="sf-destination">Destination</label>
+          <input
+            type="text"
+            id="sf-destination"
+            placeholder="Where are you going?"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="search-field">
+          <label for="sf-date">Date</label>
+          <input
+            type="date"
+            id="sf-date"
+            aria-label="Select tour date"
+          />
+        </div>
+
+        <div class="search-field">
+          <label for="sf-guests">Guests</label>
+          <select id="sf-guests" aria-label="Number of guests">
+            <option value="1">1 guest</option>
+            <option value="2" selected>2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+            <option value="5">5+ guests</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" aria-label="Search tours">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Search Tours
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================== MAIN RESULTS ======================== -->
+  <main>
+    <div class="container">
+      <div class="results-layout">
+
+        <!-- ====== FILTERS SIDEBAR ====== -->
+        <aside class="filters-sidebar" id="filters-sidebar" aria-label="Tour filters">
+          <div class="filters-title">
+            Filters
+            <button class="filters-clear" id="clear-filters-btn" aria-label="Clear all filters">Clear all</button>
+          </div>
+
+          <!-- Category -->
+          <div class="filter-group" role="group" aria-labelledby="cat-label">
+            <div class="filter-group-label" id="cat-label">Category</div>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Cultural" /> Cultural
+              <span class="filter-check-count">3</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Adventure" /> Adventure
+              <span class="filter-check-count">2</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Food &amp; Culture" /> Food &amp; Culture
+              <span class="filter-check-count">2</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Sailing" /> Sailing
+              <span class="filter-check-count">1</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Heritage" /> Heritage
+              <span class="filter-check-count">1</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Sightseeing" /> Sightseeing
+              <span class="filter-check-count">1</span>
+            </label>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-group" role="group" aria-labelledby="price-label">
+            <div class="filter-group-label" id="price-label">Price Range (per person)</div>
+            <div class="price-range-inputs">
+              <div class="price-range-input">
+                <label for="price-min">Min $</label>
+                <input type="number" id="price-min" placeholder="0" min="0" max="1000" />
+              </div>
+              <div class="price-range-input">
+                <label for="price-max">Max $</label>
+                <input type="number" id="price-max" placeholder="500" min="0" max="1000" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Duration -->
+          <div class="filter-group" role="group" aria-labelledby="dur-label">
+            <div class="filter-group-label" id="dur-label">Duration</div>
+            <label class="filter-check">
+              <input type="checkbox" name="duration" value="short" /> Under 6 hours
+              <span class="filter-check-count">1</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="duration" value="half" /> 6–9 hours
+              <span class="filter-check-count">3</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="duration" value="full" /> 10–12 hours
+              <span class="filter-check-count">3</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="duration" value="long" /> 12+ hours
+              <span class="filter-check-count">1</span>
+            </label>
+          </div>
+
+          <!-- Difficulty -->
+          <div class="filter-group" role="group" aria-labelledby="diff-label">
+            <div class="filter-group-label" id="diff-label">Difficulty</div>
+            <label class="filter-check">
+              <input type="checkbox" name="difficulty" value="Easy" /> Easy
+              <span class="filter-check-count">6</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="difficulty" value="Moderate" /> Moderate
+              <span class="filter-check-count">2</span>
+            </label>
+          </div>
+
+          <!-- Rating -->
+          <div class="filter-group" role="group" aria-labelledby="rating-label">
+            <div class="filter-group-label" id="rating-label">Minimum Rating</div>
+            <label class="filter-check">
+              <input type="radio" name="rating" value="4.5" /> 4.5+ ★★★★½
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="rating" value="4" /> 4.0+ ★★★★
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="rating" value="0" checked /> Any rating
+            </label>
+          </div>
+
+          <button class="btn btn-primary btn-full" id="apply-filters-btn" style="margin-top: 8px;">
+            Apply Filters
+          </button>
+        </aside>
+
+        <!-- ====== RESULTS COLUMN ====== -->
+        <div class="results-column">
+          <div class="results-header">
+            <div>
+              <div class="results-count">
+                Showing <strong id="results-count">8</strong> tours
+                <span id="results-context"></span>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button class="mobile-filter-btn" id="mobile-filter-btn" aria-expanded="false" aria-controls="filters-sidebar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+                </svg>
+                Filters
+              </button>
+              <div class="sort-control">
+                <label for="sort-select">Sort:</label>
+                <select id="sort-select" aria-label="Sort results by">
+                  <option value="relevance">Recommended</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="reviews">Most Reviewed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tour Cards Container -->
+          <div class="tour-cards" id="tour-cards" role="list" aria-label="Tour results">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- No Results State -->
+          <div class="no-results" id="no-results" style="display:none;" role="status">
+            <div class="no-results-icon" aria-hidden="true">🔍</div>
+            <h3>No tours found</h3>
+            <p>Try adjusting your filters or search term</p>
+            <button class="btn btn-outline" id="reset-btn" style="margin-top: 16px;">Reset All Filters</button>
+          </div>
+        </div>
+
+      </div><!-- /results-layout -->
+    </div>
+  </main>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-logo">WanderDay</div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </div>
+      <div>&copy; 2026 WanderDay. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- ======================== TOAST ======================== -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ======================== SCRIPTS ======================== -->
+  <script src="js/tours-data.js"></script>
+  <script src="js/tours.js"></script>
+</body>
+</html>
